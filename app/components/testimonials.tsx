@@ -7,7 +7,7 @@ const Testimonials = () => {
     <Container>
       <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3">
         <div className="lg:col-span-2 xl:col-auto">
-          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
+          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14">
             <p className="text-2xl leading-normal ">
               Share a real{" "}
               <Mark>
@@ -24,7 +24,7 @@ const Testimonials = () => {
           </div>
         </div>
         <div className="">
-          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
+          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14">
             <p className="text-2xl leading-normal ">
               Make sure you only pick the{" "}
               <Mark>
@@ -41,7 +41,7 @@ const Testimonials = () => {
           </div>
         </div>
         <div className="">
-          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
+          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14">
             <p className="text-2xl leading-normal ">
               This is an{" "}
               <Mark>

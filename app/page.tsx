@@ -4,6 +4,9 @@ import SectionTitle from "./components/section-title";
 import Benefits from "./components/benefits";
 import Video from "./components/video";
 import Testimonials from "./components/testimonials";
+import Faq from "./components/faq";
+import Cta from "./components/cta";
+import Footer from "./components/footer";
 
 import { benefitOne, benefitTwo } from "./components/data";
 
@@ -51,6 +54,17 @@ export default function Home() {
       </SectionTitle>
 
       <Testimonials />
+
+      <SectionTitle pretitle="FAQ" title="Frequently Asked Questions">
+        <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
+          Answer your customers possible questions here, it will increase the
+          conversion rate as well as support or chat requests.
+        </p>
+      </SectionTitle>
+
+      <Faq />
+      <Cta />
+      <Footer />
     </>
   );
 }
