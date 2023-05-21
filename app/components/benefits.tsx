@@ -31,6 +31,7 @@ const Benefits: React.FC<BenefitsProps> = (props) => {
                 width="521"
                 height="1"
                 alt="Benefits"
+                priority
                 className={"object-cover w-auto"}
               />
             </div>
