@@ -1,13 +1,21 @@
 "use client";
+import posthog from "posthog-js";
 
 import React, { useEffect, useState } from "react";
 
 const ThemeChanger = () => {
   const [theme, setTheme] = useState("");
 
-  console.log(theme);
-
   useEffect(() => {
+    if (
+      process.env.NODE_ENV === "production" &&
+      process.env.NEXT_PUBLIC_POST_HOG_ID
+    ) {
+      posthog.init(process.env.NEXT_PUBLIC_POST_HOG_ID, {
+        api_host: "https://app.posthog.com",
+      });
+    }
+
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       document.documentElement.classList.add("dark");
       return setTheme("dark");
@@ -34,7 +42,7 @@ const ThemeChanger = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
-            viewBox="0 0 20 20"
+            viewBox="0 0 24 24"
             fill="currentColor"
           >
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
@@ -51,8 +59,7 @@ const ThemeChanger = () => {
           <span className="sr-only">Dark Mode</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            className="w-5 h-5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

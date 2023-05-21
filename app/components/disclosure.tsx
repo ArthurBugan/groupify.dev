@@ -29,7 +29,7 @@ const DisclosureComponents = () => {
 
             <Disclosure.Button
               aria-label="Toggle Menu"
-              className="px-2 py-1 ml-auto text-gray-500 rounded-md lg:hidden hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700"
+              className="px-2 py-1 ml-auto text-gray-500 rounded-md lg:hidden hover:text-indigo-500 focus:text-slate-100 focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-indigo-600"
             >
               <svg
                 className="w-6 h-6 fill-current"
