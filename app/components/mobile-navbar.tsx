@@ -64,10 +64,11 @@ const DisclosureComponents = () => {
                   </Link>
                 ))}
                 <Link
-                  href="/"
+                  about="_blank"
+                  href="https://chrome.google.com/webstore/detail/groupify/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=groupify-lp"
                   className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5"
                 >
-                  Get Started
+                  Install for free
                 </Link>
               </>
             </Disclosure.Panel>

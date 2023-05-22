@@ -9,7 +9,7 @@ import {
 
 const benefitOne = {
   title: "Automatically sync your collections on any browser",
-  desc: "Never lose a channel that you subscribe again, now you can organize them into quick to acess groups and in the future share them to your friends",
+  desc: "Never lose a channel that you are subscribed again, now you can organize them into quick to acess groups and in the future share them to your friends",
   image: "/images/benefit-one.svg",
   bullets: [
     {
