@@ -37,22 +37,36 @@ const Faq = () => {
 
 const faqdata = [
   {
-    question: "Is this template completely free to use?",
-    answer: "Yes, this template is completely free to use.",
+    question: "Is this browser extension completely free to use?",
+    answer: "Yes, this browser extension is free to use.",
   },
   {
-    question: "Can I use it in a commercial project?",
-    answer: "Yes, this you can.",
+    question: "Can I donate to the project if I like it?",
+    answer: () => (
+      <div className="flex flex-row">
+        <p>Yes, you can </p>
+        <a
+          className="ml-1 text-indigo-600 hover:text-indigo-900 underline"
+          href="https://ko-fi.com/scriptingarthur"
+        >
+          Support the project.
+        </a>
+      </div>
+    ),
   },
   {
-    question: "What is your refund policy? ",
-    answer:
-      "If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked.",
-  },
-  {
-    question: "Do you offer technical support? ",
-    answer:
-      "No, we don't offer technical support for free downloads. Please purchase a support plan to get 6 months of support.",
+    question: "Is there any other way to help? ",
+    answer: () => (
+      <div className="flex flex-row">
+        <p>If you're happy remember to star the project on github</p>
+        <a
+          className="ml-1 text-indigo-600 hover:text-indigo-900 underline"
+          href="https://github.com/ArthurBugan/groupify"
+        >
+          Star us.
+        </a>
+      </div>
+    ),
   },
 ];
 

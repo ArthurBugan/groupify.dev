@@ -16,28 +16,26 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      <SectionTitle
-        pretitle="Groupify Benefits"
-        title=" Why should you use this landing page"
-      >
+      <SectionTitle pretitle="Groupify Benefits" title=" With this extension:">
         <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
-          Groupify is a free landing page & marketing website template for
-          startups and indie projects. Its built with Next.js & TailwindCSS. And
-          its completely open-source.
+          You can use this cool YouTube extension to create collections that fit
+          perfectly into the YouTube layout. It's a super easy way to manage
+          your YouTube subscriptions. And Its completely open-source.
         </p>
       </SectionTitle>
 
+      <p id="product" />
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
 
+      <p id="features" />
       <SectionTitle
         pretitle="Watch a video"
-        title="Learn how to fullfil your needs"
+        title="Learn how to use the extension"
       >
         <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
-          This section is to highlight a promo or demo video of your product.
-          Analysts says a landing page with video has 3% more conversion rate.
-          So, don&apos;t forget to add one. Just like this.
+          Don't miss out on any of our product's incredible features! Watch this
+          video to learn how to extract the best that our product has to offer.
         </p>
       </SectionTitle>
 
@@ -48,8 +46,7 @@ export default function Home() {
         title="Here's what our customers said"
       >
         <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
-          Testimonails is a great way to increase the brand trust and awareness.
-          Use this section to highlight your popular customers.
+          See what our users are talking about
         </p>
       </SectionTitle>
 
@@ -57,8 +54,8 @@ export default function Home() {
 
       <SectionTitle pretitle="FAQ" title="Frequently Asked Questions">
         <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 lg:text-xl xl:text-xl dark:text-gray-300">
-          Answer your customers possible questions here, it will increase the
-          conversion rate as well as support or chat requests.
+          Ensure you have no lingering doubts by checking our comprehensive FAQ
+          section.
         </p>
       </SectionTitle>
 

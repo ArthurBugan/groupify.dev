@@ -1,53 +1,53 @@
 import {
   FaceSmileIcon,
   ChartBarSquareIcon,
-  CursorArrowRaysIcon,
+  ShareIcon,
   DevicePhoneMobileIcon,
   AdjustmentsHorizontalIcon,
   SunIcon,
 } from "@heroicons/react/24/solid";
 
 const benefitOne = {
-  title: "Highlight your benefits",
-  desc: "You can use this space to highlight your first benefit or a feature of your product. It can also contain an image or Illustration like in the example along with some bullet points.",
+  title: "Automatically sync your collections on any browser",
+  desc: "Never lose a channel that you subscribe again, now you can organize them into quick to acess groups and in the future share them to your friends",
   image: "/images/benefit-one.svg",
   bullets: [
     {
-      title: "Understand your customers",
-      desc: "Then explain the first point breifly in one or two lines.",
+      title: "Add a custom icon to your YouTube collections",
+      desc: "Enhance the context of your groups by utilizing our extensive library of icons.",
       icon: <FaceSmileIcon />,
     },
     {
-      title: "Improve acquisition",
-      desc: "Here you can add the next benefit point.",
+      title: "Improve organization",
+      desc: "Discover a centralized hub for all your content needs as you open YouTube.",
       icon: <ChartBarSquareIcon />,
     },
     {
-      title: "Drive customer retention",
-      desc: "This will be your last bullet point in this section.",
-      icon: <CursorArrowRaysIcon />,
+      title: "Share with your friends",
+      desc: "Share your groups with the world through easily shareable links, enabling others to clone or collaborate on them.",
+      icon: <ShareIcon />,
     },
   ],
 };
 
 const benefitTwo = {
-  title: "Offer more benefits here",
-  desc: "You can use this same layout with a flip image to highlight your rest of the benefits of your product. It can also contain an image or Illustration as above section along with some bullet points.",
+  title: "Easy to use and Dark & Light Mode",
+  desc: "Organizing your subscriptions has never been easier with our 100% free and limitless browser extension. Say goodbye to worrying about the number of channels you have to manage, as we've got you covered.",
   image: "/images/benefit-two.svg",
   bullets: [
     {
-      title: "Mobile Responsive Template",
-      desc: "Groupify is designed as a mobile first responsive template.",
+      title: "Great UI and UX",
+      desc: "Groupify is meticulously designed to provide you with the finest UI/UX experience possible.",
       icon: <DevicePhoneMobileIcon />,
     },
     {
-      title: "Powered by Next.js & TailwindCSS",
-      desc: "This template is powered by latest technologies and tools.",
+      title: "Powered by React & TailwindCSS",
+      desc: "We constantly leverage cutting-edge technologies and maintain a relentless pursuit of improvements.",
       icon: <AdjustmentsHorizontalIcon />,
     },
     {
       title: "Dark & Light Mode",
-      desc: "Groupify comes with a zero-config light & dark mode. ",
+      desc: "Groupify offers both light and dark modes that automatically adapt to your system configuration. ",
       icon: <SunIcon />,
     },
   ],

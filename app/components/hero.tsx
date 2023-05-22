@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <>
       <Container className="flex flex-wrap">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-8 pt-20 text-center lg:pt-32">
           <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight dark:text-slate-100 text-slate-900 sm:text-7xl">
             Grouping{" "}
             <span className="relative whitespace-nowrap text-indigo-600">
@@ -50,33 +50,6 @@ const Hero = () => {
               </svg>
               <span className="ml-3">Star on github</span>
             </a>
-          </div>
-        </div>
-      </Container>
-
-      <Container>
-        <div className="flex flex-col justify-center">
-          <div className="text-xl text-center text-gray-700 dark:text-white">
-            Trusted by <span className="text-indigo-600">2000+</span> customers
-            worldwide
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-5 mt-10 md:justify-around">
-            <div className="pt-2 text-gray-400 dark:text-gray-400">
-              <AmazonLogo />
-            </div>
-            <div className="text-gray-400 dark:text-gray-400">
-              <VerizonLogo />
-            </div>
-            <div className="text-gray-400 dark:text-gray-400">
-              <MicrosoftLogo />
-            </div>
-            <div className="pt-1 text-gray-400 dark:text-gray-400">
-              <NetflixLogo />
-            </div>
-            <div className="pt-2 text-gray-400 dark:text-gray-400">
-              <SonyLogo />
-            </div>
           </div>
         </div>
       </Container>

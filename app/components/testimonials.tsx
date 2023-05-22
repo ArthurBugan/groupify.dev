@@ -9,53 +9,43 @@ const Testimonials = () => {
         <div className="lg:col-span-2 xl:col-auto">
           <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14">
             <p className="text-2xl leading-normal ">
-              Share a real{" "}
+              Groupify revolutionized my subscription management. Its{" "}
               <Mark>
-                <span>testimonial</span>
-              </Mark>
-              that hits some of your benefits from one of your popular customer.
-            </p>
-
-            <Avatar
-              image="/images/user1.jpg"
-              name="Sarah Steiner"
-              title="VP Sales at Google"
-            />
-          </div>
-        </div>
-        <div className="">
-          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14">
-            <p className="text-2xl leading-normal ">
-              Make sure you only pick the{" "}
-              <Mark>
-                <span>right sentence</span>
-              </Mark>
-              to keep it short and simple.
-            </p>
-
-            <Avatar
-              image="/images/user2.jpg"
-              name="Dylan Ambrose"
-              title="Lead marketer at Netflix"
-            />
-          </div>
-        </div>
-        <div className="">
-          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14">
-            <p className="text-2xl leading-normal ">
-              This is an{" "}
-              <Mark>
-                <span>awesome</span>
+                <span>seamless</span>
               </Mark>{" "}
-              landing page template I&apos;ve seen. I would use this for
-              anything.
+              interface and intuitive features make organizing channels
+              effortless. A true game-changer
             </p>
 
-            <Avatar
-              image="/images/user3.jpg"
-              name="Gabrielle Winn"
-              title="Co-founder of Acme Inc"
-            />
+            <Avatar image="/images/user1.jpg" name="Sarah Steiner" title="" />
+          </div>
+        </div>
+        <div className="">
+          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14">
+            <p className="text-2xl leading-normal ">
+              Groupify simplifies my online experience. Customizing and grouping
+              subscriptions has saved me{" "}
+              <Mark>
+                <span>valuable time</span>
+              </Mark>
+              .An essential tool for staying organized in the digital world
+            </p>
+
+            <Avatar image="/images/user2.jpg" name="Dylan Ambrose" title="" />
+          </div>
+        </div>
+        <div className="">
+          <div className="flex flex-col justify-between w-full h-full dark:bg-slate-900 bg-gray-100 px-14 rounded-2xl py-14">
+            <p className="text-2xl leading-normal ">
+              Groupify exceeded expectations with its seamless system-matching
+              modes,{" "}
+              <Mark>
+                <span>vibrant icon library,</span>
+              </Mark>{" "}
+              and convenient collaboration features. Highly recommended!
+            </p>
+
+            <Avatar image="/images/user3.jpg" name="Gabrielle Winn" title="" />
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const DisclosureComponents = () => {
-  const navigation = ["Product", "Features", "Pricing", "Company", "Blog"];
+  const navigation = ["Product", "Features", "Blog"];
 
   return (
     <Disclosure>
