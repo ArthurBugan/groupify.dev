@@ -31,7 +31,7 @@ const benefitOne = {
 };
 
 const benefitTwo = {
-  title: "Easy to use and Dark & Light Mode",
+  title: "Easy to use on Dark & Light Mode",
   desc: "Organizing your subscriptions has never been easier with our 100% free and limitless browser extension. Say goodbye to worrying about the number of channels you have to manage, as we've got you covered.",
   image: "/images/benefit-two.svg",
   bullets: [
