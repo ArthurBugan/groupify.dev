@@ -5,11 +5,17 @@ import Container from "./container";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 
-const Faq = () => {
+interface FaqProps {
+  lang: string;
+}
+
+const Faq: React.FC<FaqProps> = ({ lang }) => {
+  let faq = lang === "en" ? faqData : faqDataPt;
+
   return (
     <Container className="!p-0">
       <div className="w-full max-w-2xl p-2 mx-auto rounded-2xl">
-        {faqdata.map((item) => (
+        {faq.map((item) => (
           <div key={item.question} className="mb-5">
             <Disclosure>
               {({ open }) => (
@@ -35,7 +41,7 @@ const Faq = () => {
   );
 };
 
-const faqdata = [
+const faqData = [
   {
     question: "Is this browser extension completely free to use?",
     answer: "Yes, this browser extension is free to use.",
@@ -64,6 +70,44 @@ const faqdata = [
           href="https://github.com/ArthurBugan/groupify"
         >
           Star us.
+        </a>
+      </div>
+    ),
+  },
+];
+
+const faqDataPt = [
+  {
+    question: "Essa extensão de navegador é totalmente gratuita?",
+    answer: "Sim, essa extensão de navegador é gratuita para usar.",
+  },
+  {
+    question: "Posso fazer uma doação para o projeto se eu gostar?",
+    answer: () => (
+      <div className="flex flex-row">
+        <p>Sim, você pode </p>
+        <a
+          className="ml-1 text-indigo-600 hover:text-indigo-900 underline"
+          href="https://ko-fi.com/scriptingarthur"
+        >
+          Apoiar o projeto.
+        </a>
+      </div>
+    ),
+  },
+  {
+    question: "Existe alguma outra maneira de ajudar?",
+    answer: () => (
+      <div className="flex flex-row">
+        <p>
+          Se você está satisfeito, lembre-se de dar uma estrela ao projeto no
+          GitHub
+        </p>
+        <a
+          className="ml-1 text-indigo-600 hover:text-indigo-900 underline"
+          href="https://github.com/ArthurBugan/groupify"
+        >
+          Nos dê uma estrela.
         </a>
       </div>
     ),

@@ -1,0 +1,41 @@
+{
+  "lang": "pt-BR",
+  "hero": {
+    "title": "Agrupe seus canais",
+    "span": "facilmente",
+    "title_end": "no Youtube.",
+    "subtitle": "Gerencie seus canais do YouTube em grupos e listas. Acesse-os pela barra lateral do YouTube.",
+    "install": "Instale de graça",
+    "star": "Estrele no github"
+  },
+  "navigation": ["Produto", "Funcionalidades", "Blog"],
+  "benefits": {
+    "pretitle": "Benefícios do Groupify",
+    "title": "Com essa extensão:",
+    "subtitle": "Você pode usar esta incrível extensão do YouTube para criar coleções que se encaixam perfeitamente no layout do YouTube. É uma maneira super fácil de gerenciar suas inscrições no YouTube. E é completamente open-source."
+  },
+  "functionality": {
+    "pretitle": "Assista a um vídeo",
+    "title": "Aprenda como usar a extensão:",
+    "subtitle": "Não perca nenhuma das incríveis funcionalidades do nosso produto! Assista a este vídeo para aprender como extrair o melhor que nosso produto tem a oferecer."
+  },
+  "testimonials": {
+    "pretitle": "Depoimentos",
+    "title": "Aqui está o que nossos clientes disseram",
+    "subtitle": "Veja sobre o que nossos usuários estão falando"
+  },
+  "faq": {
+    "pretitle": "FAQ",
+    "title": "Perguntas Frequentes",
+    "subtitle": "Certifique-se de não ter dúvidas pendentes consultando nossa seção abrangente de perguntas frequentes."
+  },
+  "cta": {
+    "title": "Pronto para experimentar esta extensão?",
+    "subtitle": "Não deixe seus canais desorganizados",
+    "anchor": "Instalar gratuitamente"
+  },
+  "footer": {
+    "title": "Groupify é uma extensão gratuita para navegadores baseados em Chromium para gerenciar sua lista de inscritos do YouTube. É construído com Plasmo e TailwindCSS",
+    "follow": "Nos acompanhe"
+  }
+}

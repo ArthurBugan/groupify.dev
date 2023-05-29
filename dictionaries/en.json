@@ -1,0 +1,41 @@
+{
+  "lang": "en",
+  "hero": {
+    "title": "Grouping",
+    "span": "made simple",
+    "title_end": "for youtube subscriptions.",
+    "subtitle": "Manage your youtube channels into groups and lists. Access them from Youtube the sidebar, and have fun.",
+    "install": "Install for free",
+    "star": "Star on github"
+  },
+  "navigation": ["Product", "Features", "Blog"],
+  "benefits": {
+    "pretitle": "Groupify Benefits",
+    "title": "With this extension:",
+    "subtitle": "You can use this cool YouTube extension to create collections that fit perfectly into the YouTube layout. It's a super easy way to manage your YouTube subscriptions. And Its completely open-source."
+  },
+  "functionality": {
+    "pretitle": "Watch a video",
+    "title": "Learn how to use the extension:",
+    "subtitle": "Don't miss out on any of our product's incredible features! Watch this video to learn how to extract the best that our product has to offer."
+  },
+  "testimonials": {
+    "pretitle": "Testimonials",
+    "title": "Here's what our customers said",
+    "subtitle": "See what our users are talking about"
+  },
+  "faq": {
+    "pretitle": "FAQ",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Ensure you have no lingering doubts by checking our comprehensive FAQ section."
+  },
+  "cta": {
+    "title": "Ready to try-out this extension?",
+    "subtitle": "Don&apos;t let your channels disorganized",
+    "anchor": "Install for free"
+  },
+  "footer": {
+    "title": "Groupify is a free browser extension for chromium based browsers to manage your Youtube subscribers list. Its built with Plasmo & TailwindCSS",
+    "follow": "Follow us"
+  }
+}
