@@ -42,7 +42,7 @@ const benefitOnePT = {
     },
     {
       title: "Melhore a organização",
-      desc: "Descubra um centro centralizado para todas as suas necessidades de conteúdo ao abrir o YouTube.",
+      desc: "Descubra um hub centralizado para todas as suas necessidades de conteúdo ao abrir o YouTube.",
       icon: <ChartBarSquareIcon />,
     },
     {
@@ -83,7 +83,7 @@ const benefitTwoPT = {
   bullets: [
     {
       title: "Ótima interface de usuário e experiência do usuário",
-      desc: "O Groupify é meticulosamente projetado para fornecer a melhor experiência possível de interface e experiência do usuário.",
+      desc: "O Groupify é cuidadosamente projetado para fornecer a melhor experiência possível de interface e experiência do usuário.",
       icon: <DevicePhoneMobileIcon />,
     },
     {

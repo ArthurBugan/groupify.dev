@@ -77,7 +77,7 @@ interface BenefitProps {
 const Benefit: React.FC<BenefitProps> = (props) => {
   return (
     <>
-      <div className="flex items-start space-x-3 hover:bg-slate-900 p-4 rounded">
+      <div className="flex items-start space-x-3 hover:bg-slate-200 dark:hover:bg-slate-900 p-4 rounded">
         <div className="flex items-center justify-center flex-shrink-0 mt-1 bg-indigo-500 rounded-md w-11 h-11 ">
           {React.cloneElement(props.icon, {
             className: "w-7 h-7 text-indigo-50",
