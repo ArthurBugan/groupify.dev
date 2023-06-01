@@ -26,7 +26,7 @@ const Hero = ({ dictionary }: any) => {
           <div className="mt-10 flex justify-center gap-x-6">
             <a
               target="_blank"
-              className="group inline-flex ring-1 items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none ring-indigo-600 bg-indigo-600 hover:bg-indigo-600 dark:text-slate-300 text-slate-700 dark:hover:text-slate-100 hover:text-slate-900 hover:ring-indigo-900 active:bg-slate-100 active:text-slate-600 focus-visible:outline-blue-600 focus-visible:ring-slate-300"
+              className="group inline-flex ring-1 items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none ring-indigo-600 bg-indigo-600 hover:bg-indigo-600 dark:text-slate-300 text-slate-200 dark:hover:text-slate-100 hover:text-slate-400 hover:ring-indigo-900 active:bg-slate-100 active:text-slate-600 focus-visible:outline-blue-600 focus-visible:ring-slate-300"
               href="https://chrome.google.com/webstore/detail/groupify/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=groupify-lp"
             >
               {dictionary.hero.install}
