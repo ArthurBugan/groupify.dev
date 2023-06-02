@@ -92,7 +92,7 @@ const Footer = ({ dictionary }: any) => {
             Copyright © {new Date().getFullYear()}. Made with ♥ by{" "}
             <a
               className="text-indigo-500 hover:text-indigo-900 dark:hover:text-slate-200"
-              href="https://web3templates.com/"
+              href="https://linkedin.com/in/arthur-paloczy-bugan?utm_source=groupify-lp"
               target="_blank"
               rel="noopener"
             >
