@@ -3,7 +3,6 @@
 import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
-import LocaleSwitcher from "./locale-switcher";
 
 const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
   return (
@@ -51,9 +50,6 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
                   )}
                 </svg>
               </Disclosure.Button>
-              <div className="block lg:hidden ml-2">
-                <LocaleSwitcher showLanguage={showLanguage} />
-              </div>
             </div>
 
             <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
