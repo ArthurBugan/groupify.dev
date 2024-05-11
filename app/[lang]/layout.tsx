@@ -40,6 +40,8 @@ export default function RootLayout({
           crossOrigin="anonymous"
         ></script>
 
+        <meta name="google-adsense-account" content="ca-pub-4077364511521347" />
+
         <meta name="application-name" content="&nbsp;" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-TileImage" content="mstile.png" />
