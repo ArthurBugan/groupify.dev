@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Loader } from "@/components/ui/loader";
 
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -13,14 +14,18 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { post } from "@/lib/requests";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Loader } from "@/components/ui/loader";
+import { PasswordInput } from "@/components/ui/password-input";
 
 type Inputs = {
-  email: string;
-  encrypted_password: string;
+  password: string;
+  password_confirmation: string;
 };
 
-export default function ForgetPassword() {
+export default function ForgetPasswordConfirmation({
+  token,
+}: {
+  token: String;
+}) {
   const [error, setError] = useState({ error: "" });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -35,17 +40,12 @@ export default function ForgetPassword() {
     setError({ error: "" });
 
     try {
-      const resp = await post(
-        "/forget-password",
-        JSON.stringify({ ...data, encrypted_password: "" }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
+      await post(`/forget-password/confirm/${token}`, JSON.stringify(data), {
+        "Content-Type": "application/json",
+      });
 
-      router.push("/success/forget-password");
+      router.push("/success/new-password");
     } catch (error: any) {
-      console.log(error);
       setError(error);
     }
 
@@ -60,13 +60,28 @@ export default function ForgetPassword() {
             Reset your password
           </h2>
           <p className="mt-2 text-gray-500 dark:text-gray-400">
-            Enter your email to reset your password.
+            Enter your new password to reset it.
           </p>
         </div>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+          {" "}
           <div>
-            <Label htmlFor="email">Email address</Label>
-            <Input id="email" required type="email" {...register("email")} />
+            <Label htmlFor="password">New Password</Label>
+            <PasswordInput
+              id="password"
+              placeholder="super secret"
+              required
+              {...register("password")}
+            />
+          </div>
+          <div>
+            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <PasswordInput
+              id="password_confirmation"
+              required
+              placeholder="super secret"
+              {...register("password_confirmation")}
+            />
           </div>
           <Button disabled={loading} className="w-full" type="submit">
             Reset password
@@ -84,7 +99,7 @@ export default function ForgetPassword() {
           <Alert variant="default">
             <AlertTitle>Oops, something went wrong!</AlertTitle>
             <AlertDescription>
-              Please check your email and password and try again.
+              Please check your password and new password and try again.
             </AlertDescription>
           </Alert>
         )}

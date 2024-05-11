@@ -44,7 +44,6 @@ const Login = () => {
 
       router.push("/dashboard/groups");
     } catch (error: any) {
-      console.log(error);
       setError(error);
     }
 

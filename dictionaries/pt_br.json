@@ -9,7 +9,7 @@
     "star": "Favorite no github"
   },
   "navigation": ["Produto", "Funcionalidades", "Blog"],
-  "pages": [{ "name": "Entrar / Cadastrar", "slug": "/login" }],
+  "pages": [{ "name": "Entrar / Cadastrar", "slug": "login" }],
   "benefits": {
     "pretitle": "Benefícios do Groupify",
     "title": "Com essa extensão:",

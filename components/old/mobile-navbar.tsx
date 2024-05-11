@@ -11,7 +11,7 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
       {({ open }) => (
         <>
           <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
-            <Link href={"/" + dictionary.lang}>
+            <Link href={"/"}>
               <span className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100">
                 <span>
                   <Image
@@ -61,7 +61,7 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
                 {dictionary.navigation?.map((item: any, index: any) => (
                   <Link
                     key={item.lang}
-                    href={"/" + dictionary.lang + "/#" + item}
+                    href={"/#" + item}
                     className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
                   >
                     {item}
@@ -70,7 +70,7 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
                 {dictionary.pages?.map((menu: any, index: any) => (
                   <Link
                     key={menu.lang}
-                    href={"/" + dictionary.lang + "/" + menu.slug}
+                    href={"/" + menu.slug}
                     className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
                   >
                     {menu.name}

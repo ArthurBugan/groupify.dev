@@ -45,7 +45,6 @@ export default function Register() {
 
       router.push("/success/registration");
     } catch (error: any) {
-      console.log(error);
       setError(error);
     }
 
