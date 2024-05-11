@@ -21,7 +21,6 @@ const post = async (url: string, body: any, headers: any = {}) => {
       headers
     });
 
-
     if (!response.ok) {
       const responseBody = await response.json();
       throw responseBody;

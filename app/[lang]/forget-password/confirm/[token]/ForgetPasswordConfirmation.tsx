@@ -7,20 +7,25 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Loader } from "@/components/ui/loader";
+
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { PasswordInput } from "@/components/ui/password-input";
 
 import { post } from "@/lib/requests";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { PasswordInput } from "@/components/ui/password-input";
 
 type Inputs = {
-  email: string;
   password: string;
+  password_confirmation: string;
 };
 
-const Login = () => {
+export default function ForgetPasswordConfirmation({
+  token,
+}: {
+  token: String;
+}) {
   const [error, setError] = useState({ error: "" });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -32,17 +37,14 @@ const Login = () => {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
-    const formData = new FormData();
     setError({ error: "" });
 
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-
     try {
-      const resp = await post("/authorize", formData);
-      localStorage.setItem("Authorization", resp.access_token);
+      await post(`/forget-password/confirm/${token}`, JSON.stringify(data), {
+        "Content-Type": "application/json",
+      });
 
-      router.push("/dashboard/groups");
+      router.push("/success/new-password");
     } catch (error: any) {
       console.log(error);
       setError(error);
@@ -54,53 +56,51 @@ const Login = () => {
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className="w-full max-w-md space-y-6 rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
-        <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Login</h1>
-          <p className="text-gray-500 dark:text-gray-400">
-            Enter your email and password to access your account.
+        <div className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Reset your password
+          </h2>
+          <p className="mt-2 text-gray-500 dark:text-gray-400">
+            Enter your new password to reset it.
           </p>
         </div>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+          {" "}
           <div>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              placeholder="email@example.com"
+            <Label htmlFor="password">New Password</Label>
+            <PasswordInput
+              id="password"
+              placeholder="super secret"
               required
-              type="email"
-              {...register("email")}
+              {...register("password")}
             />
           </div>
           <div>
-            <Label htmlFor="password">Password</Label>
-            <PasswordInput id="password" required {...register("password")} />
+            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <PasswordInput
+              id="password_confirmation"
+              required
+              placeholder="super secret"
+              {...register("password_confirmation")}
+            />
           </div>
           <Button disabled={loading} className="w-full" type="submit">
-            Sign in
+            Reset password
           </Button>
         </form>
-        <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+        <div className="text-center">
           <Link
             className="text-sm font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
-            href="/forget-password"
+            href="/login"
           >
-            Forgot Password?
+            Back to sign in
           </Link>
-        </p>
-        <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-          Don't have an account?{" "}
-          <Link
-            className="text-sm font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
-            href="/register"
-          >
-            Register
-          </Link>
-        </p>
+        </div>
         {error.error && (
           <Alert variant="default">
             <AlertTitle>Oops, something went wrong!</AlertTitle>
             <AlertDescription>
-              Please check your email and password and try again.
+              Please check your password and new password and try again.
             </AlertDescription>
           </Alert>
         )}
@@ -108,6 +108,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}

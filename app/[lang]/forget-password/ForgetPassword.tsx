@@ -6,21 +6,21 @@ import Link from "next/link";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Loader } from "@/components/ui/loader";
+
 import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { PasswordInput } from "@/components/ui/password-input";
 
 import { post } from "@/lib/requests";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { Loader } from "@/components/ui/loader";
 
 type Inputs = {
   email: string;
-  password: string;
+  encrypted_password: string;
 };
 
-const Login = () => {
+export default function ForgetPassword() {
   const [error, setError] = useState({ error: "" });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -32,17 +32,18 @@ const Login = () => {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
-    const formData = new FormData();
     setError({ error: "" });
 
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-
     try {
-      const resp = await post("/authorize", formData);
-      localStorage.setItem("Authorization", resp.access_token);
+      const resp = await post(
+        "/forget-password",
+        JSON.stringify({ ...data, encrypted_password: "" }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
 
-      router.push("/dashboard/groups");
+      router.push("/success/forget-password");
     } catch (error: any) {
       console.log(error);
       setError(error);
@@ -54,48 +55,31 @@ const Login = () => {
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className="w-full max-w-md space-y-6 rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
-        <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Login</h1>
-          <p className="text-gray-500 dark:text-gray-400">
-            Enter your email and password to access your account.
+        <div className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Reset your password
+          </h2>
+          <p className="mt-2 text-gray-500 dark:text-gray-400">
+            Enter your email to reset your password.
           </p>
         </div>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              placeholder="email@example.com"
-              required
-              type="email"
-              {...register("email")}
-            />
-          </div>
-          <div>
-            <Label htmlFor="password">Password</Label>
-            <PasswordInput id="password" required {...register("password")} />
+            <Label htmlFor="email">Email address</Label>
+            <Input id="email" required type="email" {...register("email")} />
           </div>
           <Button disabled={loading} className="w-full" type="submit">
-            Sign in
+            Reset password
           </Button>
         </form>
-        <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+        <div className="text-center">
           <Link
             className="text-sm font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
-            href="/forget-password"
+            href="/login"
           >
-            Forgot Password?
+            Back to sign in
           </Link>
-        </p>
-        <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-          Don't have an account?{" "}
-          <Link
-            className="text-sm font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
-            href="/register"
-          >
-            Register
-          </Link>
-        </p>
+        </div>
         {error.error && (
           <Alert variant="default">
             <AlertTitle>Oops, something went wrong!</AlertTitle>
@@ -108,6 +92,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}

@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 import { post } from "@/lib/requests";
+import { PasswordInput } from "@/components/ui/password-input";
 
 type Inputs = {
   email: string;
@@ -42,7 +43,7 @@ export default function Register() {
         "Content-Type": "application/json",
       });
 
-      router.push("/registration-success");
+      router.push("/success/registration");
     } catch (error: any) {
       console.log(error);
       setError(error);
@@ -67,7 +68,7 @@ export default function Register() {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
-                  placeholder="m@example.com"
+                  placeholder="email@example.com"
                   required
                   type="email"
                   {...register("email")}
@@ -75,32 +76,29 @@ export default function Register() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input
+                <PasswordInput
                   id="password"
                   required
-                  type="password"
                   {...register("encrypted_password")}
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="confirm-password">Confirm Password</Label>
-                <Input
+                <PasswordInput
                   id="confirm-password"
                   required
-                  type="password"
                   {...register("encrypted_password_confirmation")}
                 />
               </div>
-              <Button className="w-full" type="submit">
+              <Button disabled={loading} className="w-full" type="submit">
                 Register
               </Button>
               <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-                Already have an account?
+                Already have an account?{" "}
                 <Link
-                  className="font-medium text-blue-600 hover:underline"
+                  className="text-sm font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
                   href="/login"
                 >
-                  {" "}
                   Login
                 </Link>
               </p>

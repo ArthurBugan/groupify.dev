@@ -7,7 +7,7 @@ import * as animationData from "./success.json";
 
 export default function RegistrationSuccess() {
   const defaultOptions = {
-    loop: true,
+    loop: false,
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
@@ -17,11 +17,11 @@ export default function RegistrationSuccess() {
 
   return (
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-gray-100 px-4 py-12 dark:bg-gray-950">
-      <Lottie height={400} width={400} options={defaultOptions} />
+      <Lottie height={200} width={200} options={defaultOptions} />
       <div className="w-full max-w-md space-y-4">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight">
-            Registration Successful!
+            Email sent successful!
           </h2>
           <p className="mt-2 text-gray-500 dark:text-gray-400">
             Please check your email for further instructions.
