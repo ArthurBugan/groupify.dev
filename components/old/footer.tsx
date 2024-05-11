@@ -37,7 +37,7 @@ const Footer = ({ dictionary }: any) => {
                 {dictionary.navigation.map((item: string, index: number) => (
                   <Link
                     key={index}
-                    href={"/" + dictionary.lang + "/#" + item}
+                    href={"/#" + item}
                     className="w-full px-4 py-2 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-slate-700"
                   >
                     {item}

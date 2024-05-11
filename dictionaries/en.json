@@ -9,7 +9,7 @@
     "star": "Star on github"
   },
   "navigation": ["Product", "Features", "Blog"],
-  "pages": [{ "name": "Login / Registration", "slug": "/login" }],
+  "pages": [{ "name": "Login / Registration", "slug": "login" }],
   "benefits": {
     "pretitle": "Groupify Benefits",
     "title": "With this extension:",
