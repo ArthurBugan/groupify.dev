@@ -34,6 +34,12 @@ export default function RootLayout({
           sizes="any"
         />
 
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4077364511521347"
+          crossOrigin="anonymous"
+        ></script>
+
         <meta name="application-name" content="&nbsp;" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-TileImage" content="mstile.png" />
