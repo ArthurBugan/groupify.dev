@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Lottie from "react-lottie";
 
-import * as animationData from "../../../registration-success/success.json";
+import * as animationData from "../../../success/registration/success.json";
 import { useEffect } from "react";
 
 import { post } from "@/lib/requests";
