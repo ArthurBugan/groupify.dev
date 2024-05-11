@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import LocaleSwitcher from "./locale-switcher";
 
-const DisclosureComponents = ({ dictionary }: any) => {
+const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
   return (
     <Disclosure>
       {({ open }) => (
@@ -51,20 +51,29 @@ const DisclosureComponents = ({ dictionary }: any) => {
                   )}
                 </svg>
               </Disclosure.Button>
-              <div className="block lg:hidden">
-                <LocaleSwitcher />
+              <div className="block lg:hidden ml-2">
+                <LocaleSwitcher showLanguage={showLanguage} />
               </div>
             </div>
 
             <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
               <>
-                {dictionary.navigation.map((item: any, index: any) => (
+                {dictionary.navigation?.map((item: any, index: any) => (
                   <Link
-                    key={index}
+                    key={item.lang}
                     href={"/" + dictionary.lang + "/#" + item}
                     className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
                   >
                     {item}
+                  </Link>
+                ))}
+                {dictionary.pages?.map((menu: any, index: any) => (
+                  <Link
+                    key={menu.lang}
+                    href={"/" + dictionary.lang + "/" + menu.slug}
+                    className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
+                  >
+                    {menu.name}
                   </Link>
                 ))}
                 <Link

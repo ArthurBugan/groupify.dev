@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { i18n } from "../../../i18n-config";
+import { i18n } from "@/i18n-config";
 
 import {
   Select,
@@ -15,7 +15,11 @@ import {
 import { useState } from "react";
 import { redirect } from "next/navigation";
 
-export default function LocaleSwitcher() {
+export default function LocaleSwitcher({
+  showLanguage = false,
+}: {
+  showLanguage: boolean;
+}) {
   const pathName = usePathname();
 
   const [locale, setLocale] = useState(pathName.replaceAll("/", ""));
@@ -28,7 +32,7 @@ export default function LocaleSwitcher() {
   };
 
   return (
-    <div>
+    <div className={showLanguage ? "block" : "hidden"}>
       <Select
         onValueChange={() => {
           redirect(redirectedPathName(locale));
@@ -46,7 +50,7 @@ export default function LocaleSwitcher() {
                   width={24}
                   height={24}
                   alt={`Flag for ${locale}`}
-                  src={`images/${locale}.svg`}
+                  src={`${locale}.svg`}
                 />
               </Link>
             </SelectItem>

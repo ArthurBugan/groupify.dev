@@ -1,11 +1,11 @@
-import Navbar from "./components/navbar";
-import Hero from "./components/hero";
-import SectionTitle from "./components/section-title";
-import Benefits from "./components/benefits";
-import Video from "./components/video";
-import Faq from "./components/faq";
-import Cta from "./components/cta";
-import Footer from "./components/footer";
+import Navbar from "@/components/old/navbar";
+import Hero from "@/components/old/hero";
+import SectionTitle from "@/components/old/section-title";
+import Benefits from "@/components/old/benefits";
+import Video from "@/components/old/video";
+import Faq from "@/components/old/faq";
+import Cta from "@/components/old/cta";
+import Footer from "@/components/old/footer";
 
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
@@ -14,7 +14,7 @@ import {
   benefitTwo,
   benefitOnePT,
   benefitTwoPT,
-} from "./components/data";
+} from "@/components/old/data";
 
 export default async function Home({
   params: { lang },
