@@ -33,7 +33,6 @@ export default function RootLayout({
           type="image/png"
           sizes="any"
         />
-
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4077364511521347"
