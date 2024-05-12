@@ -34,7 +34,7 @@ const Navbar = ({ dictionary, showLanguage = true }: any) => {
           </ul>
         </div>
 
-        <div className="hidden mr-3 space-x-4 lg:flex nav__item">
+        <div className="mr-3 space-x-4 lg:flex nav__item">
           <ThemeChanger />
         </div>
       </nav>
