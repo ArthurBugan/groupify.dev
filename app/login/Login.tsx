@@ -40,8 +40,6 @@ const Login = () => {
 
     try {
       const resp = await post("/authorize", formData);
-      localStorage.setItem("Authorization", resp.access_token);
-
       router.push("/dashboard/groups");
     } catch (error: any) {
       setError(error);

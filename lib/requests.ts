@@ -1,21 +1,30 @@
 const base_url = process.env.NEXT_PUBLIC_BASE_URL;
 
 // GET Request
-const get = (url: string) => {
-  fetch(base_url + url)
-    .then(response => response.json())
-    .then(data => {
-      console.log('GET Response:', data);
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
+const get = async (url: string, headers: any = {}) => {
+  try {
+    const response = await fetch(base_url + url, {
+      credentials: 'include',
+      method: 'GET',
+      headers
     });
+
+    if (!response.ok) {
+      const responseBody = await response.json();
+      throw { responseBody, status: response.status };
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    throw error;
+  }
 }
 
 // POST Request
 const post = async (url: string, body: any, headers: any = {}) => {
   try {
     const response = await fetch(base_url + url, {
+      credentials: 'include',
       method: 'POST',
       body,
       headers
@@ -23,12 +32,11 @@ const post = async (url: string, body: any, headers: any = {}) => {
 
     if (!response.ok) {
       const responseBody = await response.json();
-      throw responseBody;
+      throw { responseBody, status: response.status };
     }
 
     return await response.json();
-  } catch (error) {
-    // Handle errors, including HTTP errors
+  } catch (error: any) {
     throw error;
   }
 }

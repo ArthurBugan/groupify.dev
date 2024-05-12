@@ -1,3 +1,8 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { sendToBackgroundViaRelay } from "@plasmohq/messaging";
+
 import {
   TableHead,
   TableRow,
@@ -7,7 +12,49 @@ import {
   Table,
 } from "@/components/ui/table";
 
-export default function Dashboard() {
+import { get } from "@/lib/requests";
+import { useEffect, useState } from "react";
+import { getFamily } from "@/lib/utils";
+import { DynamicIcon } from "@/components/ui/icon";
+
+type Item = {
+  id: string;
+  icon: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export default function Page() {
+  const router = useRouter();
+  const [items, setData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await get("/groups", {
+          "Content-Type": "application/json",
+        });
+
+        setData(data);
+
+        await sendToBackgroundViaRelay({
+          extensionId: "jnfmgkehbfbcajcpcfhjbcjdjffiejln",
+          name: "save-auth" as never,
+          body: {
+            token: "lalaa",
+            uid: "lala",
+            refreshToken: "lalala",
+          },
+        });
+      } catch (error: any) {
+        if (error?.status === 401) {
+          return router.replace("/login");
+        }
+      }
+    })();
+  }, []);
+
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
       <div className="border shadow-sm rounded-lg">
@@ -16,107 +63,32 @@ export default function Dashboard() {
             <TableRow>
               <TableHead className="w-[80px]">Image</TableHead>
               <TableHead className="max-w-[150px]">Name</TableHead>
-              <TableHead className="hidden md:table-cell">Status</TableHead>
-              <TableHead className="hidden md:table-cell">Inventory</TableHead>
-              <TableHead>Vendor</TableHead>
+              <TableHead className="hidden md:table-cell">Created At</TableHead>
+              <TableHead className="hidden md:table-cell">Updated At</TableHead>
+              <TableHead className="hidden md:table-cell">
+                N° Channels
+              </TableHead>
+              <TableHead>Edit</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>
-                <img
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
-              <TableCell className="font-medium">Glimmer Lamps</TableCell>
-              <TableCell className="hidden md:table-cell">
-                In Production
-              </TableCell>
-              <TableCell>500 in stock</TableCell>
-              <TableCell className="hidden md:table-cell">
-                Luminance Creations
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <img
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
-              <TableCell className="font-medium">Aqua Filters</TableCell>
-              <TableCell className="hidden md:table-cell">
-                Available for Order
-              </TableCell>
-              <TableCell>750 in stock</TableCell>
-              <TableCell className="hidden md:table-cell">
-                HydraClean Solutions
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <img
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
-              <TableCell className="font-medium">Eco Planters</TableCell>
-              <TableCell className="hidden md:table-cell">
-                Backordered
-              </TableCell>
-              <TableCell>300 in stock</TableCell>
-              <TableCell className="hidden md:table-cell">
-                GreenGrowth Designers
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <img
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
-              <TableCell className="font-medium">Zest Juicers</TableCell>
-              <TableCell className="hidden md:table-cell">
-                Newly Launched
-              </TableCell>
-              <TableCell>1000 in stock</TableCell>
-              <TableCell className="hidden md:table-cell">
-                FreshTech Appliances
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <img
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/placeholder.svg"
-                  width="64"
-                />
-              </TableCell>
-              <TableCell className="font-medium">Flexi Wearables</TableCell>
-              <TableCell className="hidden md:table-cell">
-                Selling Fast
-              </TableCell>
-              <TableCell>200 in stock</TableCell>
-              <TableCell className="hidden md:table-cell">
-                Vitality Gear Co.
-              </TableCell>
-            </TableRow>
+            {items.map((item: Item) => (
+              <TableRow key={item.id}>
+                <TableCell>
+                  <DynamicIcon
+                    className="text-primary"
+                    lib={getFamily(item.icon)}
+                    icon={item.icon}
+                  />
+                </TableCell>
+                <TableCell className="font-medium">{item.name}</TableCell>
+                <TableCell>{item.createdAt}</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  {item.updatedAt}
+                </TableCell>
+                <TableCell className="hidden md:table-cell">0</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
