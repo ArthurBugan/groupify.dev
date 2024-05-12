@@ -41,13 +41,13 @@ export default function Page() {
         let decodedCookie = decodeURIComponent(document.cookie);
         let ca = decodedCookie.split(";");
 
-        ca.find((c) => c.includes("auth-token"))?.trim?.();
+        let token = ca.find((c) => c.includes("auth-token"))?.trim?.() || "";
 
         await sendToBackgroundViaRelay({
           extensionId: "jnfmgkehbfbcajcpcfhjbcjdjffiejln",
           name: "save-auth" as never,
           body: {
-            token: ca,
+            token: token,
             uid: "lala",
             refreshToken: "lalala",
           },
