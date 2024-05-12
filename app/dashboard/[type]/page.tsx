@@ -17,28 +17,36 @@ import { useEffect, useState } from "react";
 import { getFamily } from "@/lib/utils";
 import { DynamicIcon } from "@/components/ui/icon";
 
+type Item = {
+  id: string;
+  icon: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export default function Page() {
   const router = useRouter();
   const [items, setData] = useState([]);
 
   useEffect(() => {
     (async () => {
-      await sendToBackgroundViaRelay({
-        extensionId: "jnfmgkehbfbcajcpcfhjbcjdjffiejln",
-        name: "save-auth",
-        body: {
-          token: "lalaa",
-          uid: "lala",
-          refreshToken: "lalala",
-        },
-      });
-
       try {
         const data = await get("/groups", {
           "Content-Type": "application/json",
         });
 
         setData(data);
+
+        await sendToBackgroundViaRelay({
+          extensionId: "jnfmgkehbfbcajcpcfhjbcjdjffiejln",
+          name: "save-auth" as never,
+          body: {
+            token: "lalaa",
+            uid: "lala",
+            refreshToken: "lalala",
+          },
+        });
       } catch (error: any) {
         if (error?.status === 401) {
           return router.replace("/login");
@@ -64,7 +72,7 @@ export default function Page() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {items.map((item) => (
+            {items.map((item: Item) => (
               <TableRow key={item.id}>
                 <TableCell>
                   <DynamicIcon
