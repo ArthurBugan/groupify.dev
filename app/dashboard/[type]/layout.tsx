@@ -20,6 +20,8 @@ import {
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
 
+import { cookies } from "next/headers";
+
 export default function DashboardLayout({
   children,
   params: { type },
