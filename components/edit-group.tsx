@@ -11,27 +11,28 @@ import {
   DialogContent,
   Dialog,
 } from "@/components/ui/dialog";
+
+import { BadgePlus } from "lucide-react";
+
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import {
-  TableHead,
-  TableRow,
-  TableHeader,
-  TableCell,
-  TableBody,
-  Table,
-} from "@/components/ui/table";
-import { Edit } from "lucide-react";
+import { ComboboxChannels } from "@/components/ui/combobox-channels";
+import { Edit, Trash } from "lucide-react";
 import * as z from "zod";
 
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { Combobox } from "./ui/combobox";
+import { useEffect, useState } from "react";
+import { post } from "@/lib/requests";
 
 const schema = z.object({
-  created_at: z.string(),
+  channel: z.string().optional(),
+  id: z.string().optional(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
+  userId: z.string().optional(),
   icon: z.string(),
-  id: z.number(),
   name: z.string().min(2, { message: "Group name is required" }),
-  user_id: z.string().uuid(),
   channels: z.array(
     z.object({
       id: z.string(),
@@ -44,11 +45,22 @@ const schema = z.object({
 
 export type Schema = z.infer<typeof schema>;
 
-export function EditGroup() {
+export function EditGroup({
+  formValues,
+  type,
+}: {
+  formValues: any;
+  type: "add" | "edit";
+}) {
+  const [open, setOpen] = useState(false);
+
   const { ...methods } = useForm<Schema>({
+    defaultValues: {
+      icon: "FcFolder",
+    },
     mode: "onBlur",
-    shouldFocusError: true,
-    shouldUnregister: true,
+    shouldFocusError: false,
+    shouldUnregister: false,
     resolver: zodResolver(schema),
   });
 
@@ -58,16 +70,43 @@ export function EditGroup() {
     name: "channels",
   });
 
-  const onSubmit = async (groupData: Schema) => {};
+  useEffect(() => {
+    console.log("inside useEffect");
+    methods.reset({ icon: "FcFolder", ...formValues });
+    replace(formValues.channels);
+  }, [open]);
+
+  const onSubmit = async (groupData: Schema) => {
+    console.log("onsubmit", groupData);
+
+    const resp = await post("/group", groupData);
+    console.log(resp);
+  };
+
+  const onInvalid = (invalid: any) => {
+    console.log("invalid", invalid);
+  };
+
+  console.log(fields, formValues, methods);
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Edit size={24} />
+    <Dialog modal={true}>
+      <DialogTrigger onClick={() => setOpen(!open)} className="pointer" asChild>
+        {type === "add" ? (
+          <Button variant="outline">
+            <BadgePlus size={24} className="h-4 w-4 mr-2" />{" "}
+            <span>New Group</span>
+          </Button>
+        ) : (
+          <Edit size={24} />
+        )}
       </DialogTrigger>
+
       <DialogContent className="sm:max-w-[800px]">
         <DialogHeader>
-          <DialogTitle>Edit Group</DialogTitle>
+          <DialogTitle>
+            {type === "add" ? "Add Group" : "Edit Group"}
+          </DialogTitle>
           <DialogDescription>
             Make changes to your group here. Click save when you're done.
           </DialogDescription>
@@ -75,111 +114,82 @@ export function EditGroup() {
 
         <div className="grid gap-4 py-4">
           <FormProvider {...methods}>
-            <form className="flex flex-col gap-y-5">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label className="text-right" htmlFor="name">
-                  Name
-                </Label>
-                <Input
-                  className="col-span-3"
-                  id="name"
-                  value="YouTube Subscriptions"
-                  {...methods.register("name")}
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label className="text-right" htmlFor="updatedAt">
-                  Updated At
-                </Label>
-                <Input
-                  className="col-span-3"
-                  disabled
-                  id="updatedAt"
-                  value="2023-05-01"
-                />
-              </div>
-              <div className="border rounded-lg overflow-hidden">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>ID</TableHead>
-                      <TableHead>Thumbnail</TableHead>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Created At</TableHead>
-                      <TableHead>Updated At</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>1</TableCell>
-                      <TableCell>
-                        <img
-                          alt="Channel Thumbnail"
-                          className="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/placeholder.svg"
-                          width="64"
-                        />
-                      </TableCell>
-                      <TableCell className="font-medium">Vercel</TableCell>
-                      <TableCell>2023-04-01</TableCell>
-                      <TableCell>2023-05-01</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>2</TableCell>
-                      <TableCell>
-                        <img
-                          alt="Channel Thumbnail"
-                          className="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/placeholder.svg"
-                          width="64"
-                        />
-                      </TableCell>
-                      <TableCell className="font-medium">Shadcn</TableCell>
-                      <TableCell>2023-04-01</TableCell>
-                      <TableCell>2023-05-01</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>3</TableCell>
-                      <TableCell>
-                        <img
-                          alt="Channel Thumbnail"
-                          className="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/placeholder.svg"
-                          width="64"
-                        />
-                      </TableCell>
-                      <TableCell className="font-medium">Acme Inc</TableCell>
-                      <TableCell>2023-04-01</TableCell>
-                      <TableCell>2023-05-01</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>4</TableCell>
-                      <TableCell>
-                        <img
-                          alt="Channel Thumbnail"
-                          className="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/placeholder.svg"
-                          width="64"
-                        />
-                      </TableCell>
-                      <TableCell className="font-medium">Groupify</TableCell>
-                      <TableCell>2023-04-01</TableCell>
-                      <TableCell>2023-05-01</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </div>
-            </form>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label className="text-right" htmlFor="name">
+                Name
+              </Label>
+              <Input id="name" {...methods.register("name")} />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label className="text-right" htmlFor="updatedAt">
+                Icon
+              </Label>
+              <Combobox {...methods.register("icon")} />
+            </div>
+
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label className="text-right" htmlFor="updatedAt">
+                Add new channel
+              </Label>
+              <ComboboxChannels
+                append={append}
+                {...methods.register("channel")}
+              />
+            </div>
+
+            {fields?.length > 0 && (
+              <div className="font-bold text-md">My group channels</div>
+            )}
+            <div className="flex flex-col gap-y-5 max-h-[70vh] overflow-y-auto">
+              {fields?.map((c, index) => (
+                <div
+                  key={c.id}
+                  className="flex flex-row w-full items-center justify-between"
+                >
+                  <img src={c.thumbnail} className="rounded-full h-5 w-5" />
+                  <p className="text-sm">{c.name}</p>
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      const values = methods.getValues();
+
+                      console.log({
+                        id: c.id,
+                        group_id: values.id,
+                        userId: values.userId,
+                      });
+                      return remove(index);
+                    }}
+                    variant="secondary"
+                    type="button"
+                  >
+                    <Trash size={16} />
+                  </Button>
+                </div>
+              ))}
+            </div>
+            <Input className="hidden" id="id" {...methods.register("id")} />
+            <Input
+              className="hidden"
+              id="userId"
+              {...methods.register("userId")}
+            />
+            <Input
+              className="hidden"
+              id="createdAt"
+              {...methods.register("createdAt")}
+            />
+            <Input
+              className="hidden"
+              id="updatedAt"
+              {...methods.register("updatedAt")}
+            />
           </FormProvider>
         </div>
         <DialogFooter>
           <Button
-            type="submit"
-            onClick={methods.handleSubmit(onSubmit)}
+            type="button"
+            onClick={methods.handleSubmit(onSubmit, onInvalid)}
             disabled={methods.formState.isSubmitting}
           >
             Save Changes

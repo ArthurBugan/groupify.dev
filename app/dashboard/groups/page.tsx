@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { sendToBackgroundViaRelay } from "@plasmohq/messaging";
+import { channels } from "@/lib/signals";
 
 import { Button } from "@/components/ui/button";
 
@@ -29,7 +30,6 @@ import { useEffect, useState } from "react";
 import { getFamily } from "@/lib/utils";
 import { DynamicIcon } from "@/components/ui/icon";
 import ThemeChanger from "@/components/old/theme-switch";
-import { Edit } from "lucide-react";
 import { EditGroup } from "@/components/edit-group";
 
 type Item = {
@@ -52,7 +52,7 @@ export default function Page() {
 
         let token = ca.find((c) => c.includes("auth-token"))?.trim?.() || "";
 
-        await sendToBackgroundViaRelay({
+        const { status } = await sendToBackgroundViaRelay({
           extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID,
           name: "save-auth" as never,
           body: {
@@ -61,6 +61,8 @@ export default function Page() {
             refreshToken: "lalala",
           },
         });
+
+        channels.value = status;
 
         const data = await get(`/groups`, {
           "Content-Type": "application/json",
@@ -74,8 +76,6 @@ export default function Page() {
       }
     })();
   }, []);
-
-  const editGroup = () => {};
 
   return (
     <>
@@ -178,13 +178,17 @@ export default function Page() {
                   </TableCell>
                   <TableCell className="hidden md:table-cell">0</TableCell>
                   <TableCell className="w-[80px]">
-                    <EditGroup />
+                    <EditGroup
+                      type="edit"
+                      formValues={{ ...item, channels: [] }}
+                    />
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </div>
+        <EditGroup formValues={{ channels: [] }} type="add" />
       </main>
     </>
   );

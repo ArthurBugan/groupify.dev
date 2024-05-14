@@ -2,10 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import {
-  sendToBackgroundViaRelay,
-  sendToBackground,
-} from "@plasmohq/messaging";
+import { sendToBackgroundViaRelay } from "@plasmohq/messaging";
+
+import { channels } from "@/lib/signals";
 
 import { Button } from "@/components/ui/button";
 
@@ -17,7 +16,6 @@ import {
   TableBody,
   Table,
 } from "@/components/ui/table";
-
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenuTrigger,
@@ -30,8 +28,6 @@ import {
 
 import { get } from "@/lib/requests";
 import { useEffect, useState } from "react";
-import { getFamily } from "@/lib/utils";
-import { DynamicIcon } from "@/components/ui/icon";
 import ThemeChanger from "@/components/old/theme-switch";
 
 type Item = {
@@ -49,37 +45,26 @@ export default function Page() {
   useEffect(() => {
     (async () => {
       try {
-        const data = await get(`/channels`, {
-          "Content-Type": "application/json",
-        });
-
-        setData(data);
-
-        try {
-          const resp = await sendToBackground({
-            extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID,
-            name: "get-channels" as never,
-          });
-
-          console.log("resp", resp);
-        } catch (err) {
-          console.log("err", err);
-        }
-
         let decodedCookie = decodeURIComponent(document.cookie);
         let ca = decodedCookie.split(";");
 
         let token = ca.find((c) => c.includes("auth-token"))?.trim?.() || "";
 
-        await sendToBackgroundViaRelay({
+        const { status } = await sendToBackgroundViaRelay({
           extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID,
           name: "save-auth" as never,
           body: {
             token: token,
-            uid: "lala",
-            refreshToken: "lalala",
           },
         });
+
+        channels.value = status;
+
+        const data = await get(`/channels`, {
+          "Content-Type": "application/json",
+        });
+
+        setData(data);
       } catch (error: any) {
         if (error?.status === 401) {
           return router.replace("/login");
