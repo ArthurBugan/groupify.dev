@@ -66,6 +66,8 @@ export default function Page() {
           },
         });
 
+        console.log("status", status);
+
         channels.value = status;
 
         const data = await get(`/groups`);

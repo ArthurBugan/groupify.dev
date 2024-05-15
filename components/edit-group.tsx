@@ -82,13 +82,15 @@ export function EditGroup({
   });
 
   useEffect(() => {
-    methods.reset({ ...initialValues, ...formValues });
-    replace(groups_channels.value[formValues.id] || []);
+    if (open) {
+      methods.reset({ ...initialValues, ...formValues });
+      replace(groups_channels.value[formValues.id] || []);
 
-    (async () => {
-      const channel = await get(`/channels/${formValues.id}`);
-      groups_channels.value[formValues.id] = channel;
-    })();
+      (async () => {
+        const channel = await get(`/channels/${formValues.id}`);
+        groups_channels.value[formValues.id] = channel;
+      })();
+    }
   }, [open]);
 
   const onSubmit = async (groupData: Schema) => {
@@ -101,21 +103,23 @@ export function EditGroup({
       await put(`/group/${groupData.id}`, JSON.stringify(groupData));
     }
 
+    let group_id = group.id || groupData.id;
+
     groupData.channels = groupData.channels.map((g) => ({
       ...g,
       newContent: false,
       userId: "",
-      groupId: group.id || groupData.id,
+      groupId: group_id,
     }));
 
-    await put(`/channels/${groupData.id}`, JSON.stringify(groupData.channels));
+    await put(`/channels/${group_id}`, JSON.stringify(groupData.channels));
     const data = await get(`/groups`);
-    const channel = await get(`/channels/${groupData.id}`);
+    const channel = await get(`/channels/${group_id}`);
 
     groups.value = data;
 
     // @ts-ignore
-    groups_channels.value[groupData.id] = channel;
+    groups_channels.value[group_id] = channel;
     setOpen(false);
   };
 
