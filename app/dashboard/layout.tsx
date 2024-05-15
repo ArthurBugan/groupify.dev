@@ -39,9 +39,11 @@ export default function DashboardLayout({
             </nav>
           </div>
           <div className="mt-auto p-4">
-            <Card>
+            <Card
+              onClick={() => window.open("https://ko-fi.com/scriptingarthur")}
+            >
               <CardHeader className="pb-4">
-                <CardTitle>Upgrade to Pro</CardTitle>
+                <CardTitle>Donate</CardTitle>
                 <CardDescription>
                   Unlock all features and get unlimited access to our support
                   team
@@ -49,7 +51,7 @@ export default function DashboardLayout({
               </CardHeader>
               <CardContent>
                 <Button className="w-full" size="sm">
-                  Upgrade
+                  Donate
                 </Button>
               </CardContent>
             </Card>
