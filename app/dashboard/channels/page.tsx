@@ -60,9 +60,7 @@ export default function Page() {
 
         channels.value = status;
 
-        const data = await get(`/channels`, {
-          "Content-Type": "application/json",
-        });
+        const data = await get(`/channels`);
 
         setData(data);
       } catch (error: any) {

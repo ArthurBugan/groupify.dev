@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import {
   DialogFooter,
   DialogContent,
   Dialog,
+  DialogClose,
 } from "@/components/ui/dialog";
 
 import { BadgePlus } from "lucide-react";
@@ -20,10 +22,10 @@ import { ComboboxChannels } from "@/components/ui/combobox-channels";
 import { Edit, Trash } from "lucide-react";
 import * as z from "zod";
 
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { FormProvider, set, useFieldArray, useForm } from "react-hook-form";
 import { Combobox } from "./ui/combobox";
-import { useEffect, useState } from "react";
-import { post } from "@/lib/requests";
+import { get, post, put } from "@/lib/requests";
+import { groups, groups_channels } from "@/lib/signals";
 
 const schema = z.object({
   channel: z.string().optional(),
@@ -37,13 +39,24 @@ const schema = z.object({
     z.object({
       id: z.string(),
       name: z.string(),
+      createdAt: z.string().optional(),
+      groupId: z.string().optional(),
+      updatedAt: z.string().optional(),
+      userId: z.string().optional(),
+      channelId: z.string(),
       thumbnail: z.string(),
-      new_content: z.boolean(),
+      newContent: z.boolean().optional(),
     })
   ),
 });
 
 export type Schema = z.infer<typeof schema>;
+
+let initialValues = {
+  icon: "FcFolder",
+  createdAt: new Date().toISOString().replace("Z", ""),
+  updatedAt: new Date().toISOString().replace("Z", ""),
+};
 
 export function EditGroup({
   formValues,
@@ -55,9 +68,7 @@ export function EditGroup({
   const [open, setOpen] = useState(false);
 
   const { ...methods } = useForm<Schema>({
-    defaultValues: {
-      icon: "FcFolder",
-    },
+    defaultValues: initialValues,
     mode: "onBlur",
     shouldFocusError: false,
     shouldUnregister: false,
@@ -71,26 +82,49 @@ export function EditGroup({
   });
 
   useEffect(() => {
-    console.log("inside useEffect");
-    methods.reset({ icon: "FcFolder", ...formValues });
-    replace(formValues.channels);
+    methods.reset({ ...initialValues, ...formValues });
+    replace(groups_channels.value[formValues.id] || []);
+
+    (async () => {
+      const channel = await get(`/channels/${formValues.id}`);
+      groups_channels.value[formValues.id] = channel;
+    })();
   }, [open]);
 
   const onSubmit = async (groupData: Schema) => {
-    console.log("onsubmit", groupData);
+    let group: any = {};
+    if (type === "add") {
+      group = await post("/group", JSON.stringify(groupData), {
+        "Content-Type": "application/json",
+      });
+    } else if (type === "edit") {
+      await put(`/group/${groupData.id}`, JSON.stringify(groupData));
+    }
 
-    const resp = await post("/group", groupData);
-    console.log(resp);
+    groupData.channels = groupData.channels.map((g) => ({
+      ...g,
+      newContent: false,
+      userId: "",
+      groupId: group.id || groupData.id,
+    }));
+
+    await put(`/channels/${groupData.id}`, JSON.stringify(groupData.channels));
+    const data = await get(`/groups`);
+    const channel = await get(`/channels/${groupData.id}`);
+
+    groups.value = data;
+
+    // @ts-ignore
+    groups_channels.value[groupData.id] = channel;
+    setOpen(false);
   };
 
   const onInvalid = (invalid: any) => {
     console.log("invalid", invalid);
   };
 
-  console.log(fields, formValues, methods);
-
   return (
-    <Dialog modal={true}>
+    <Dialog onOpenChange={setOpen} open={open} modal={true}>
       <DialogTrigger onClick={() => setOpen(!open)} className="pointer" asChild>
         {type === "add" ? (
           <Button variant="outline">
@@ -140,7 +174,8 @@ export function EditGroup({
             {fields?.length > 0 && (
               <div className="font-bold text-md">My group channels</div>
             )}
-            <div className="flex flex-col gap-y-5 max-h-[70vh] overflow-y-auto">
+
+            <div className="flex max-h-60 flex-col gap-y-5 pr-5 overflow-y-auto">
               {fields?.map((c, index) => (
                 <div
                   key={c.id}
@@ -168,6 +203,7 @@ export function EditGroup({
                 </div>
               ))}
             </div>
+
             <Input className="hidden" id="id" {...methods.register("id")} />
             <Input
               className="hidden"
@@ -187,13 +223,15 @@ export function EditGroup({
           </FormProvider>
         </div>
         <DialogFooter>
-          <Button
-            type="button"
-            onClick={methods.handleSubmit(onSubmit, onInvalid)}
-            disabled={methods.formState.isSubmitting}
-          >
-            Save Changes
-          </Button>
+          <DialogClose asChild>
+            <Button
+              type="button"
+              onClick={methods.handleSubmit(onSubmit, onInvalid)}
+              disabled={methods.formState.isSubmitting}
+            >
+              Save Changes
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

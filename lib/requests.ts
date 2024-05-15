@@ -6,7 +6,9 @@ const get = async (url: string, headers: any = {}) => {
     const response = await fetch(base_url + url, {
       credentials: 'include',
       method: 'GET',
-      headers
+      headers: {
+        "Content-Type": "application/json",
+      }
     });
 
     if (!response.ok) {
@@ -41,42 +43,46 @@ const post = async (url: string, body: any, headers: any = {}) => {
   }
 }
 
-const put = (url: string) => {
-  // PUT Request
-  fetch(base_url + url, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      key: 'updated value'
-    })
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('PUT Response:', data);
-    })
-    .catch(error => {
-      console.error('Error updating data:', error);
+const put = async (url: string, body: any) => {
+  try {
+    const response = await fetch(base_url + url, {
+      credentials: 'include',
+      method: 'PUT',
+      body,
+      headers: {
+        "Content-Type": "application/json"
+      }
     });
+
+    if (!response.ok) {
+      const responseBody = await response.json();
+      throw { responseBody, status: response.status };
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    throw error;
+  }
 }
 
-const del = (url: string) => {
+const del = async (url: string, body: any) => {
   // DELETE Request
-  fetch(base_url + url, {
-    method: 'DELETE'
-  })
-    .then(response => {
-      if (response.ok) {
-        console.log('Resource deleted successfully');
-      } else {
-        console.error('Failed to delete resource');
-      }
-    })
-    .catch(error => {
-      console.error('Error deleting resource:', error);
+  try {
+    const response = await fetch(base_url + url, {
+      credentials: 'include',
+      method: 'DELETE',
+      body
     });
 
+    if (!response.ok) {
+      const responseBody = await response.json();
+      throw { responseBody, status: response.status };
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    throw error;
+  }
 }
 
 export { get, post, put, del }

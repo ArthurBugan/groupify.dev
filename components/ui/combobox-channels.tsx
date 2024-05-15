@@ -1,7 +1,8 @@
 "use client";
 
-import { Check, ChevronsUpDown } from "lucide-react";
 import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { v4 } from "uuid";
 import {
   type UseFieldArrayAppend,
   useController,
@@ -156,9 +157,10 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
                     title={item?.formattedTitle?.simpleText}
                     onSelect={() => {
                       append({
-                        id: item.entryData.guideEntryData.guideEntryId,
+                        id: v4(),
                         name: item.formattedTitle?.simpleText,
                         thumbnail: item?.thumbnail?.thumbnails[0].url,
+                        channelId: item.entryData.guideEntryData.guideEntryId,
                         new_content:
                           item.presentationStyle ===
                           "GUIDE_ENTRY_PRESENTATION_STYLE_NEW_CONTENT",
