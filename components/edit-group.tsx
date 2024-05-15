@@ -113,6 +113,8 @@ export function EditGroup({
     const channel = await get(`/channels/${groupData.id}`);
 
     groups.value = data;
+
+    // @ts-ignore
     groups_channels.value[groupData.id] = channel;
     setOpen(false);
   };

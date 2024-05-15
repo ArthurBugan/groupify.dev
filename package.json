@@ -54,6 +54,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.13",
     "@types/negotiator": "^0.6.1",
-    "@types/react-lottie": "^1.2.10"
+    "@types/react-lottie": "^1.2.10",
+    "@types/uuid": "^9.0.8"
   }
 }
