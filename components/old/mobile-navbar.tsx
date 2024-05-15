@@ -3,13 +3,14 @@
 import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
+import ThemeChanger from "./theme-switch";
 
 const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
   return (
     <Disclosure>
       {({ open }) => (
         <>
-          <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
+          <div className="flex-1	flex lg:hidden flex-wrap items-center justify-between w-full lg:w-auto">
             <Link href={"/"}>
               <span className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100">
                 <span>
@@ -25,7 +26,7 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
               </span>
             </Link>
 
-            <div className="flex flex-row">
+            <div className="flex flex-1 flex-row">
               <Disclosure.Button
                 aria-label="Toggle Menu"
                 className="px-2 py-1 ml-auto text-gray-500 rounded-md lg:hidden hover:text-indigo-500 focus:text-slate-100 focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-indigo-600"
@@ -50,6 +51,10 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
                   )}
                 </svg>
               </Disclosure.Button>
+            </div>
+
+            <div className="lg:hidden block flex-none ml-4">
+              <ThemeChanger />
             </div>
 
             <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">

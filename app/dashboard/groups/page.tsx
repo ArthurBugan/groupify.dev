@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 
 import { useRouter } from "next/navigation";
 import { sendToBackgroundViaRelay } from "@plasmohq/messaging";
@@ -26,11 +27,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { get } from "@/lib/requests";
-import { useEffect, useState } from "react";
 import { getFamily } from "@/lib/utils";
 import { DynamicIcon } from "@/components/ui/icon";
 import ThemeChanger from "@/components/old/theme-switch";
 import { EditGroup } from "@/components/edit-group";
+
+import { groups, groups_channels } from "@/lib/signals";
+import { useSignalValue } from "signals-react-safe";
 
 type Item = {
   id: string;
@@ -42,7 +45,8 @@ type Item = {
 
 export default function Page() {
   const router = useRouter();
-  const [items, setData] = useState([]);
+  const group = useSignalValue(groups);
+  const channel = useSignalValue(groups_channels);
 
   useEffect(() => {
     (async () => {
@@ -64,11 +68,23 @@ export default function Page() {
 
         channels.value = status;
 
-        const data = await get(`/groups`, {
-          "Content-Type": "application/json",
-        });
+        const data = await get(`/groups`);
+        groups.value = data;
 
-        setData(data);
+        let group_channel: any = {};
+
+        for (let g of data) {
+          const channel = await get(`/channels/${g.id}`);
+
+          if (typeof group_channel[g.id] === "undefined") {
+            group_channel[g.id] = {};
+            group_channel[g.id] = channel;
+          } else {
+            group_channel[g.id] = channel;
+          }
+        }
+
+        groups_channels.value = group_channel;
       } catch (error: any) {
         if (error?.status === 401) {
           return router.replace("/login");
@@ -76,6 +92,8 @@ export default function Page() {
       }
     })();
   }, []);
+
+  console.log("groups_channels", groups_channels.value);
 
   return (
     <>
@@ -160,7 +178,7 @@ export default function Page() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {items.map((item: Item) => (
+              {group?.map((item: Item) => (
                 <TableRow key={item.id}>
                   <TableCell>
                     <DynamicIcon
@@ -176,7 +194,9 @@ export default function Page() {
                   <TableCell className="hidden md:table-cell">
                     {item.updatedAt}
                   </TableCell>
-                  <TableCell className="hidden md:table-cell">0</TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {groups_channels.value[item.id]?.length}
+                  </TableCell>
                   <TableCell className="w-[80px]">
                     <EditGroup
                       type="edit"
