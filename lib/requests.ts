@@ -34,7 +34,7 @@ const post = async (url: string, body: any, headers: any = {}) => {
 
     if (!response.ok) {
       const responseBody = await response.json();
-      throw { responseBody, status: response.status };
+      throw { ...responseBody, status: response.status };
     }
 
     return await response.json();

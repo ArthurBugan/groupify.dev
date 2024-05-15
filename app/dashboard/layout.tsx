@@ -39,21 +39,21 @@ export default function DashboardLayout({
             </nav>
           </div>
           <div className="mt-auto p-4">
-            <Card
-              onClick={() => window.open("https://ko-fi.com/scriptingarthur")}
-            >
-              <CardHeader className="pb-4">
-                <CardTitle>Donate</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full" size="sm">
-                  Donate
-                </Button>
-              </CardContent>
+            <Card>
+              <a target="_blank" href="https://ko-fi.com/scriptingarthur">
+                <CardHeader className="pb-4">
+                  <CardTitle>Donate</CardTitle>
+                  <CardDescription>
+                    Unlock all features and get unlimited access to our support
+                    team
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button className="w-full" size="sm">
+                    Donate
+                  </Button>
+                </CardContent>
+              </a>
             </Card>
           </div>
         </div>
