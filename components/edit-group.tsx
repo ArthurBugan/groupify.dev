@@ -112,14 +112,16 @@ export function EditGroup({
       groupId: group_id,
     }));
 
-    await put(`/channels/${group_id}`, JSON.stringify(groupData.channels));
-    const data = await get(`/groups`);
-    const channel = await get(`/channels/${group_id}`);
+    if (Array.isArray(groupData.channels)) {
+      await put(`/channels/${group_id}`, JSON.stringify(groupData.channels));
+      const data = await get(`/groups`);
+      const channel = await get(`/channels/${group_id}`);
 
-    groups.value = data;
+      groups.value = data;
 
-    // @ts-ignore
-    groups_channels.value[group_id] = channel;
+      // @ts-ignore
+      groups_channels.value[group_id] = channel;
+    }
     setOpen(false);
   };
 

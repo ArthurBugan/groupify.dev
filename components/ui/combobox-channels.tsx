@@ -25,6 +25,7 @@ import {
 import { cn } from "@/lib/utils";
 
 import { channels } from "@/lib/signals";
+import { useSignalValue } from "signals-react-safe";
 
 interface ComboboxProps {
   append: (param: any) => void;
@@ -35,48 +36,44 @@ let timer: any;
 const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
   const [open, setOpen] = React.useState(false);
   const [filter, setFilter] = React.useState<string>("");
+  const channel = useSignalValue(channels);
+
   const formContext = useFormContext();
 
   const itemsCount = React.useMemo(() => {
     const filterCount = (items: any) => {
       return items.filter((i: any) =>
-        i.guideEntryRenderer.formattedTitle.simpleText
+        i.name
           .toLowerCase()
+          .includes.toLowerCase()
           .includes(filter.toLowerCase())
       ).length;
     };
 
-    if (channels.value == null) {
+    if (channel == null) {
       if (filter.length > 0) {
-        return filterCount(channels.value);
+        return filterCount(channel);
       }
 
       // @ts-ignore
-      return channels.value?.length as never;
+      return channel?.length as never;
     }
-
-    const values = channels.value;
-    values.pop();
 
     if (filter.length > 0) {
-      return filterCount(values);
+      return filterCount(channel);
     }
 
-    return values.length;
+    return channel.length;
   }, [filter]);
 
   const items = React.useMemo(() => {
     const filterCount = (items: any) => {
       return items.filter((i: any) =>
-        i.guideEntryRenderer.formattedTitle.simpleText
-          .toLowerCase()
-          .includes(filter.toLowerCase())
+        i.name.toLowerCase().includes(filter.toLowerCase())
       );
     };
 
-    const values = channels.value;
-
-    values.pop();
+    const values = channel;
 
     if (filter.length > 0) {
       return filterCount(values);
@@ -98,6 +95,8 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
     console.error(msg);
     return null;
   }
+
+  console.log(itemsCount);
 
   return (
     <Popover
@@ -147,23 +146,21 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
               listClassName="grid grid-cols-1"
               totalCount={itemsCount}
               itemContent={(index) => {
-                const item = items[index]?.guideEntryRenderer || null;
+                const item = items[index] || null;
                 if (item == null) return null;
 
                 return (
                   <CommandItem
                     className="px-4 gap-x-4 w-full flex justify-start items-center"
-                    key={item?.entryData?.guideEntryData?.guideEntryId}
-                    title={item?.formattedTitle?.simpleText}
+                    key={item?.id}
+                    title={item?.name}
                     onSelect={() => {
                       append({
                         id: v4(),
-                        name: item.formattedTitle?.simpleText,
-                        thumbnail: item?.thumbnail?.thumbnails[0].url,
-                        channelId: item.entryData.guideEntryData.guideEntryId,
-                        new_content:
-                          item.presentationStyle ===
-                          "GUIDE_ENTRY_PRESENTATION_STYLE_NEW_CONTENT",
+                        name: item.name,
+                        thumbnail: item?.thumbnail,
+                        channelId: item.channelId,
+                        new_content: item.newContent,
                       });
 
                       setOpen(false);
@@ -172,16 +169,16 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        field.value === items[index]
+                        field.value === item
                           ? "opacity-100"
                           : "hidden opacity-0"
                       )}
                     />
                     <img
-                      src={item?.thumbnail?.thumbnails[0].url}
+                      src={item.thumbnail}
                       className="h-10 w-10 rounded-full"
                     />
-                    <p>{item?.formattedTitle?.simpleText}</p>
+                    <p>{item?.name}</p>
                   </CommandItem>
                 );
               }}

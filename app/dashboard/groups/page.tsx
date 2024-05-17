@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 import { useRouter } from "next/navigation";
 import { sendToBackgroundViaRelay } from "@plasmohq/messaging";
-import { channels } from "@/lib/signals";
 
 import { Button } from "@/components/ui/button";
 
@@ -32,7 +31,7 @@ import { DynamicIcon } from "@/components/ui/icon";
 import ThemeChanger from "@/components/old/theme-switch";
 import { EditGroup } from "@/components/edit-group";
 
-import { groups, groups_channels } from "@/lib/signals";
+import { groups, groups_channels, channels } from "@/lib/signals";
 import { useSignalValue } from "signals-react-safe";
 
 type Item = {
@@ -56,7 +55,7 @@ export default function Page() {
 
         let token = ca.find((c) => c.includes("auth-token"))?.trim?.() || "";
 
-        const { status } = await sendToBackgroundViaRelay({
+        sendToBackgroundViaRelay({
           extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID,
           name: "save-auth" as never,
           body: {
@@ -66,9 +65,9 @@ export default function Page() {
           },
         });
 
-        console.log("status", status);
-
-        channels.value = status;
+        const api_channels = await get("/youtube-channels");
+        console.log(channels);
+        channels.value = api_channels;
 
         const data = await get(`/groups`);
         groups.value = data;
@@ -94,8 +93,6 @@ export default function Page() {
       }
     })();
   }, []);
-
-  console.log("groups_channels", groups_channels.value);
 
   return (
     <>
@@ -199,7 +196,11 @@ export default function Page() {
                   <TableCell className="hidden md:table-cell">
                     {groups_channels.value[item.id]?.length}
                   </TableCell>
-                  <TableCell className="w-[80px]">
+                  <TableCell className="flex space-x-2 flex-row w-[80px]">
+                    <EditGroup
+                      type="edit"
+                      formValues={{ ...item, channels: [] }}
+                    />
                     <EditGroup
                       type="edit"
                       formValues={{ ...item, channels: [] }}
