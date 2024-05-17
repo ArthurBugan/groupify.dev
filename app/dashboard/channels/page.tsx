@@ -58,7 +58,7 @@ export default function Page() {
           },
         });
 
-        channels.value = status;
+        // channels.value = status;
 
         const data = await get(`/channels`);
 
