@@ -61,7 +61,7 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
               <>
                 {dictionary.navigation?.map((item: any, index: any) => (
                   <Link
-                    key={item.lang}
+                    key={item}
                     href={"/#" + item}
                     className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
                   >
@@ -70,7 +70,7 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
                 ))}
                 {dictionary.pages?.map((menu: any, index: any) => (
                   <Link
-                    key={menu.lang}
+                    key={menu.slug}
                     href={"/" + menu.slug}
                     className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
                   >
