@@ -43,10 +43,7 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
   const itemsCount = React.useMemo(() => {
     const filterCount = (items: any) => {
       return items.filter((i: any) =>
-        i.name
-          .toLowerCase()
-          .includes.toLowerCase()
-          .includes(filter.toLowerCase())
+        i.name.toLowerCase().includes(filter.toLowerCase())
       ).length;
     };
 
@@ -96,7 +93,13 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
     return null;
   }
 
-  console.log(itemsCount);
+  const renderText = () => {
+    if (filter.length === 0) {
+      return "Visit youtube to sync your channels";
+    }
+
+    return "No channel found...";
+  };
 
   return (
     <Popover
@@ -127,7 +130,7 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
       <PopoverContent className="w-[15rem] p-0 bg-primary">
         <Command className="w-full">
           <input
-            className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 text-primary py-2 text-md ring-offset-background file:border-0 file:bg-transparent file:text-md file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-10 w-full rounded-md border border-input bg-white dark:bg-gray-800/40 px-3 text-primary py-2 text-md ring-offset-background file:border-0 file:bg-transparent file:text-md file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             onChange={(e) => {
               clearTimeout(timer);
 
@@ -140,10 +143,10 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
           />
 
           <CommandList>
-            <CommandEmpty>No channel found...</CommandEmpty>
+            <CommandEmpty>{renderText()}</CommandEmpty>
             <VirtuosoGrid
               className="virtuoso-scroller"
-              listClassName="grid grid-cols-1"
+              listClassName="grid grid-cols-1 bg-white lg:block dark:bg-gray-800/40"
               totalCount={itemsCount}
               itemContent={(index) => {
                 const item = items[index] || null;

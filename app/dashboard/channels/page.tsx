@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { sendToBackgroundViaRelay } from "@plasmohq/messaging";
 
 import { channels } from "@/lib/signals";
 
@@ -26,8 +25,7 @@ import {
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
 
-import { get } from "@/lib/requests";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ThemeChanger from "@/components/old/theme-switch";
 
 type Item = {
@@ -40,36 +38,9 @@ type Item = {
 
 export default function Page() {
   const router = useRouter();
-  const [items, setData] = useState([]);
+  const [items, setData] = useState(channels.value);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(";");
-
-        let token = ca.find((c) => c.includes("auth-token"))?.trim?.() || "";
-
-        const { status } = await sendToBackgroundViaRelay({
-          extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID,
-          name: "save-auth" as never,
-          body: {
-            token: token,
-          },
-        });
-
-        // channels.value = status;
-
-        const data = await get(`/channels`);
-
-        setData(data);
-      } catch (error: any) {
-        if (error?.status === 401) {
-          return router.replace("/login");
-        }
-      }
-    })();
-  }, []);
+  console.log(items);
 
   return (
     <>
@@ -141,16 +112,6 @@ export default function Page() {
               <TableRow>
                 <TableHead className="w-[80px]">Image</TableHead>
                 <TableHead className="max-w-[150px]">Name</TableHead>
-                <TableHead className="hidden md:table-cell">
-                  Created At
-                </TableHead>
-                <TableHead className="hidden md:table-cell">
-                  Updated At
-                </TableHead>
-                <TableHead className="hidden md:table-cell">
-                  N° Channels
-                </TableHead>
-                <TableHead>Edit</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -166,11 +127,6 @@ export default function Page() {
                     />
                   </TableCell>
                   <TableCell className="font-medium">{item.name}</TableCell>
-                  <TableCell>{item.createdAt}</TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {item.updatedAt}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">0</TableCell>
                 </TableRow>
               ))}
             </TableBody>
