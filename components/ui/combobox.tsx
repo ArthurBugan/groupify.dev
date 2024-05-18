@@ -103,7 +103,7 @@ const Combobox: React.FC<ComboboxProps> = ({ name, className }) => {
       <PopoverContent className="w-[15rem] p-0 bg-primary">
         <Command className="w-full">
           <input
-            className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 text-primary py-2 text-xl ring-offset-background file:border-0 file:bg-transparent file:text-xl file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-10 w-full rounded-md border border-input bg-white dark:bg-gray-800/40 px-3 text-primary py-2 text-xl ring-offset-background file:border-0 file:bg-transparent file:text-xl file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             onChange={(e) => {
               clearTimeout(timer);
 

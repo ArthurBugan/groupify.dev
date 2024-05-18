@@ -3,11 +3,10 @@
 import { twMerge } from "tailwind-merge";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { Group, PictureInPicture, Video } from "lucide-react";
 
 export function Links() {
   const path = usePathname();
-
-  console.log(path);
   return (
     <>
       <Link
@@ -17,7 +16,7 @@ export function Links() {
         )}
         href="/dashboard/groups"
       >
-        <ShoppingCartIcon className="h-4 w-4" />
+        <Video className="h-4 w-4" />
         Groups
       </Link>
       <Link
@@ -27,7 +26,7 @@ export function Links() {
         )}
         href="/dashboard/channels"
       >
-        <PackageIcon className="h-4 w-4" />
+        <PictureInPicture className="h-4 w-4" />
         Channels
       </Link>
     </>

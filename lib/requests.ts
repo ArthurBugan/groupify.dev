@@ -65,13 +65,14 @@ const put = async (url: string, body: any) => {
   }
 }
 
-const del = async (url: string, body: any) => {
-  // DELETE Request
+const del = async (url: string) => {
   try {
     const response = await fetch(base_url + url, {
       credentials: 'include',
       method: 'DELETE',
-      body
+      headers: {
+        "Content-Type": "application/json"
+      }
     });
 
     if (!response.ok) {

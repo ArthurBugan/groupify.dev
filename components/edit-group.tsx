@@ -112,16 +112,17 @@ export function EditGroup({
       groupId: group_id,
     }));
 
-    if (Array.isArray(groupData.channels)) {
+    if (Array.isArray(groupData.channels) && groupData.channels.length > 0) {
       await put(`/channels/${group_id}`, JSON.stringify(groupData.channels));
-      const data = await get(`/groups`);
       const channel = await get(`/channels/${group_id}`);
-
-      groups.value = data;
 
       // @ts-ignore
       groups_channels.value[group_id] = channel;
     }
+
+    const data = await get(`/groups`);
+    groups.value = data;
+
     setOpen(false);
   };
 
@@ -138,7 +139,9 @@ export function EditGroup({
             <span>New Group</span>
           </Button>
         ) : (
-          <Edit size={24} />
+          <Button variant="outline">
+            <Edit size={24} />
+          </Button>
         )}
       </DialogTrigger>
 
@@ -187,7 +190,7 @@ export function EditGroup({
                   key={c.id}
                   className="flex flex-row w-full items-center justify-between"
                 >
-                  <img src={c.thumbnail} className="rounded-full h-5 w-5" />
+                  <img src={c.thumbnail} className="rounded-full h-10 w-10" />
                   <p className="text-sm">{c.name}</p>
                   <Button
                     size="sm"

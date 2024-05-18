@@ -1,10 +1,21 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 import { sendToBackgroundViaRelay } from "@plasmohq/messaging";
 
 import { Button } from "@/components/ui/button";
+
+import {
+  DialogTrigger,
+  DialogTitle,
+  DialogDescription,
+  DialogHeader,
+  DialogFooter,
+  DialogContent,
+  DialogClose,
+  Dialog,
+} from "@/components/ui/dialog";
 
 import {
   TableHead,
@@ -33,6 +44,8 @@ import { EditGroup } from "@/components/edit-group";
 
 import { groups, groups_channels, channels } from "@/lib/signals";
 import { useSignalValue } from "signals-react-safe";
+import { DeleteGroup } from "@/components/delete-group";
+import Link from "next/link";
 
 type Item = {
   id: string;
@@ -44,29 +57,15 @@ type Item = {
 
 export default function Page() {
   const router = useRouter();
+
+  const [detect, setDetect] = useState<boolean>();
   const group = useSignalValue(groups);
   const channel = useSignalValue(groups_channels);
 
   useEffect(() => {
     (async () => {
       try {
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(";");
-
-        let token = ca.find((c) => c.includes("auth-token"))?.trim?.() || "";
-
-        sendToBackgroundViaRelay({
-          extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID,
-          name: "save-auth" as never,
-          body: {
-            token: token,
-            uid: "lala",
-            refreshToken: "lalala",
-          },
-        });
-
         const api_channels = await get("/youtube-channels");
-        console.log(channels);
         channels.value = api_channels;
 
         const data = await get(`/groups`);
@@ -92,10 +91,71 @@ export default function Page() {
         }
       }
     })();
+
+    (async () => {
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(";");
+
+      let token = ca.find((c) => c.includes("auth-token"))?.trim?.() || "";
+
+      let timer = setTimeout(() => {
+        if (groups.value.length > 0) {
+          return setDetect(true);
+        }
+        setDetect(false);
+      }, 10000);
+
+      const res = await sendToBackgroundViaRelay({
+        extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID,
+        name: "save-auth" as never,
+        body: {
+          token: token,
+          uid: "lala",
+          refreshToken: "lalala",
+        },
+      });
+
+      setDetect(true);
+      clearTimeout(timer);
+    })();
   }, []);
 
   return (
     <>
+      <Dialog modal={true} open={detect === false}>
+        <DialogContent className="sm:max-w-[800px]">
+          <DialogHeader>
+            <DialogTitle>Download extension</DialogTitle>
+            <DialogDescription>
+              <p className="text-lg">
+                Please download the{" "}
+                <Link
+                  target="_blank"
+                  className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+                  href="https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=not-found-dashboard"
+                >
+                  Groupify Extension
+                </Link>{" "}
+                from the Chrome Web Store to syncronize to be able to organize
+                your subscriptions!
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button>
+                <Link
+                  target="_blank"
+                  href="https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=not-found-dashboard"
+                >
+                  Ok
+                </Link>
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
         <Button className="lg:hidden" size="icon" variant="outline">
           <MenuIcon className="h-6 w-6" />
@@ -162,7 +222,7 @@ export default function Page() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[80px]">Image</TableHead>
+                <TableHead className="w-[80px]">Thumbnail</TableHead>
                 <TableHead className="max-w-[150px]">Name</TableHead>
                 <TableHead className="hidden md:table-cell">
                   Created At
@@ -188,23 +248,24 @@ export default function Page() {
                   </TableCell>
                   <TableCell className="font-medium">{item.name}</TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {item.createdAt}
+                    {new Date(item.createdAt).toLocaleDateString()}{" "}
+                    {new Date(item.createdAt).toLocaleTimeString()}
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {item.updatedAt}
+                    {new Date(item.updatedAt).toLocaleDateString()}{" "}
+                    {new Date(item.updatedAt).toLocaleTimeString()}
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
                     {groups_channels.value[item.id]?.length}
                   </TableCell>
                   <TableCell className="flex space-x-2 flex-row w-[80px]">
-                    <EditGroup
-                      type="edit"
-                      formValues={{ ...item, channels: [] }}
-                    />
-                    <EditGroup
-                      type="edit"
-                      formValues={{ ...item, channels: [] }}
-                    />
+                    <div className="flex flex-row space-x-2">
+                      <EditGroup
+                        type="edit"
+                        formValues={{ ...item, channels: [] }}
+                      />
+                      <DeleteGroup formValues={{ ...item, channels: [] }} />
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
