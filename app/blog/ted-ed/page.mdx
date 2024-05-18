@@ -1,0 +1,66 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "TED-Ed: Lessons Worth Sharing",
+  description: `A look at TED-Ed, a YouTube channel that creates high-quality educational videos on a wide range of topics, featuring animations and expert insights.`,
+  date: "May 18, 2024",
+  authors: ["John Doe"],
+};
+
+{" "}
+
+<h1>TED-Ed: Lessons Worth Sharing</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By John Doe | Published on May 18, 2024
+</div>
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    TED-Ed is a YouTube channel that extends the mission of the TED organization
+    by creating and sharing high-quality educational videos. Each video features
+    expert insights, engaging animations, and a storytelling approach that makes
+    learning accessible and enjoyable.
+  </span>
+</section>
+<section id="the-content-of-ted-ed">
+  <h2>The Content of TED-Ed</h2>
+  <span>
+    TED-Ed covers a vast array of topics, from science and technology to history
+    and literature. Each video is designed to provoke curiosity and inspire
+    learning, presenting complex ideas in a clear and engaging manner. The
+    channel collaborates with educators and animators to create content that is
+    both informative and visually appealing.
+  </span>
+</section>
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    The production quality of TED-Ed videos is exceptionally high, featuring
+    professional animations and expert narration. The storytelling approach,
+    combined with meticulous research and visually appealing graphics, ensures
+    that each video is both educational and captivating.
+  </span>
+</section>
+<section id="the-impact-of-ted-ed">
+  <h2>The Impact of TED-Ed</h2>
+  <span>
+    TED-Ed has made a significant impact on global education, providing free
+    access to high-quality learning resources. The channel’s videos are widely
+    used by educators, students, and lifelong learners, offering valuable
+    insights and fostering a love of learning across a diverse audience.
+  </span>
+</section>
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    TED-Ed is a leading resource in the world of educational content. Through
+    its high-quality videos and commitment to making learning accessible, the
+    channel has inspired millions of viewers to explore new topics and expand
+    their knowledge. TED-Ed continues to be a valuable platform for anyone
+    seeking to learn and grow.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}
