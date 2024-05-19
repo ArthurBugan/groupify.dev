@@ -13,13 +13,23 @@ import { Button } from "@/components/ui/button";
 import { del, get } from "@/lib/requests";
 import { groups } from "@/lib/signals";
 import { TrashIcon } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export function DeleteGroup({ formValues }: { formValues: any }) {
+  const { toast } = useToast();
+
   const deleteGroup = async () => {
     await del(`/group/${formValues.id}`);
 
     const data = await get(`/groups`);
     groups.value = data;
+
+    toast({
+      duration: 3000,
+      variant: "success",
+      title: "Group deleted",
+      description: "Keep organizing your channels!",
+    });
   };
 
   return (
