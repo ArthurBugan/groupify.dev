@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Lexend } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -43,7 +44,10 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-TileImage" content="mstile.png" />
       </head>
-      <body className={lexend.className}>{children}</body>
+      <body className={lexend.className}>
+        {children}
+        <Toaster />
+      </body>
     </html>
   );
 }

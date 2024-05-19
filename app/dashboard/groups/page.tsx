@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-
 import { useRouter } from "next/navigation";
+import { useSignalValue } from "signals-react-safe";
+
 import { sendToBackgroundViaRelay } from "@plasmohq/messaging";
 
 import { Button } from "@/components/ui/button";
+import { columns } from "./columns";
 
 import {
-  DialogTrigger,
   DialogTitle,
   DialogDescription,
   DialogHeader,
@@ -18,16 +19,6 @@ import {
 } from "@/components/ui/dialog";
 
 import {
-  TableHead,
-  TableRow,
-  TableHeader,
-  TableCell,
-  TableBody,
-  Table,
-} from "@/components/ui/table";
-
-import { Input } from "@/components/ui/input";
-import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -37,17 +28,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { get } from "@/lib/requests";
-import { getFamily } from "@/lib/utils";
-import { DynamicIcon } from "@/components/ui/icon";
 import ThemeChanger from "@/components/old/theme-switch";
-import { EditGroup } from "@/components/edit-group";
 
 import { groups, groups_channels, channels } from "@/lib/signals";
-import { useSignalValue } from "signals-react-safe";
-import { DeleteGroup } from "@/components/delete-group";
 import Link from "next/link";
-import { FcAddDatabase, FcEmptyFilter } from "react-icons/fc";
-import { Loader } from "@/components/ui/loader";
+import { DataTable } from "@/components/data-table";
+import { EditGroup } from "@/components/edit-group";
 
 type Item = {
   id: string;
@@ -60,21 +46,44 @@ type Item = {
 export default function Page() {
   const router = useRouter();
 
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [detect, setDetect] = useState<boolean>();
   const group = useSignalValue(groups);
   const channel = useSignalValue(groups_channels);
 
   useEffect(() => {
+    function detectExtensionUsingImage(
+      extensionId: string | undefined,
+      callback: Function
+    ) {
+      const img = new Image();
+      const src = `chrome-extension://${extensionId}/assets/icon.png`;
+      img.src = src;
+      img.onload = function () {
+        callback(true);
+      };
+      img.onerror = function () {
+        callback(false);
+      };
+    }
+
+    detectExtensionUsingImage(
+      process.env.NEXT_PUBLIC_EXTENSION_ID,
+      (isInstalled: boolean) => {
+        setDetect(isInstalled);
+      }
+    );
+
     (async () => {
       try {
-        const api_channels = await get("/youtube-channels");
-        channels.value = api_channels;
+        if (channels.value.length === 0) {
+          const api_channels = await get("/youtube-channels");
+          channels.value = api_channels;
+        }
 
         setLoading(true);
         const data = await get(`/groups`);
         groups.value = data;
-        setLoading(false);
 
         let group_channel: any = {};
 
@@ -103,14 +112,7 @@ export default function Page() {
 
       let token = ca.find((c) => c.includes("auth-token"))?.trim?.() || "";
 
-      let timer = setTimeout(() => {
-        if (groups.value.length > 0) {
-          return setDetect(true);
-        }
-        setDetect(false);
-      }, 10000);
-
-      const res = await sendToBackgroundViaRelay({
+      await sendToBackgroundViaRelay({
         extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID,
         name: "save-auth" as never,
         body: {
@@ -119,9 +121,6 @@ export default function Page() {
           refreshToken: "lalala",
         },
       });
-
-      setDetect(true);
-      clearTimeout(timer);
     })();
   }, []);
 
@@ -166,18 +165,7 @@ export default function Page() {
           <MenuIcon className="h-6 w-6" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
-        <div className="w-full flex-1">
-          <form>
-            <div className="relative">
-              <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
-              <Input
-                className="w-full bg-white shadow-none appearance-none pl-8 md:w-2/3 lg:w-1/3 dark:bg-gray-950"
-                placeholder="Search groups..."
-                type="search"
-              />
-            </div>
-          </form>
-        </div>
+        <div className="w-full flex-1"></div>
         <ThemeChanger />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -223,76 +211,8 @@ export default function Page() {
         </DropdownMenu>
       </header>
 
-      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-        <div className="border shadow-sm rounded-lg">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[80px]">Thumbnail</TableHead>
-                <TableHead className="max-w-[150px]">Name</TableHead>
-                <TableHead className="hidden md:table-cell">
-                  Created At
-                </TableHead>
-                <TableHead className="hidden md:table-cell">
-                  Updated At
-                </TableHead>
-                <TableHead className="hidden md:table-cell">
-                  N° Channels
-                </TableHead>
-                <TableHead>Edit</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {group?.map((item: Item) => (
-                <TableRow key={item.id}>
-                  <TableCell>
-                    <DynamicIcon
-                      className="text-primary"
-                      lib={getFamily(item.icon)}
-                      icon={item.icon}
-                    />
-                  </TableCell>
-                  <TableCell className="font-medium">{item.name}</TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {new Date(item.createdAt).toLocaleDateString()}{" "}
-                    {new Date(item.createdAt).toLocaleTimeString()}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {new Date(item.updatedAt).toLocaleDateString()}{" "}
-                    {new Date(item.updatedAt).toLocaleTimeString()}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {groups_channels.value[item.id]?.length}
-                  </TableCell>
-                  <TableCell className="flex space-x-2 flex-row w-[80px]">
-                    <div className="flex flex-row space-x-2">
-                      <EditGroup
-                        type="edit"
-                        formValues={{ ...item, channels: [] }}
-                      />
-                      <DeleteGroup formValues={{ ...item, channels: [] }} />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          {group.length === 0 && !isLoading && (
-            <div className="h-24 flex flex-col items-center justify-center">
-              <FcAddDatabase size={32} />
-              <span className="text-sm">
-                No groups found please register one to begin organizing your
-                channels.
-              </span>
-            </div>
-          )}
-          {isLoading && (
-            <div className="h-24 flex flex-col items-center justify-center">
-              <Loader />
-              <span className="text-sm mt-2">Loading your groups...</span>
-            </div>
-          )}
-        </div>
+      <main className="flex flex-1 flex-col gap-4 p-4">
+        <DataTable loading={loading} columns={columns} data={group} />
         <EditGroup formValues={{ channels: [] }} type="add" />
       </main>
     </>
@@ -316,26 +236,6 @@ function MenuIcon(props: any) {
       <line x1="4" x2="20" y1="12" y2="12" />
       <line x1="4" x2="20" y1="6" y2="6" />
       <line x1="4" x2="20" y1="18" y2="18" />
-    </svg>
-  );
-}
-
-function SearchIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
     </svg>
   );
 }

@@ -13,6 +13,7 @@ import {
   Dialog,
   DialogClose,
 } from "@/components/ui/dialog";
+import { useToast } from "@/components/ui/use-toast";
 
 import { BadgePlus } from "lucide-react";
 
@@ -66,6 +67,7 @@ export function EditGroup({
   type: "add" | "edit";
 }) {
   const [open, setOpen] = useState(false);
+  const { toast } = useToast();
 
   const { ...methods } = useForm<Schema>({
     defaultValues: initialValues,
@@ -124,6 +126,13 @@ export function EditGroup({
     groups.value = data;
 
     setOpen(false);
+
+    toast({
+      duration: 3000,
+      variant: "success",
+      title: "Group saved",
+      description: "Keep organizing your channels!",
+    });
   };
 
   const onInvalid = (invalid: any) => {

@@ -95,7 +95,7 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
 
   const renderText = () => {
     if (filter.length === 0) {
-      return "Visit youtube to sync your channels";
+      return "Visit youtube to sync your channels and then reload the page and this input will be populated";
     }
 
     return "No channel found...";

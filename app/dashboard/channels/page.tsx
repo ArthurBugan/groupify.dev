@@ -1,20 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-
+import { useEffect } from "react";
 import { channels } from "@/lib/signals";
 
 import { Button } from "@/components/ui/button";
-
-import {
-  TableHead,
-  TableRow,
-  TableHeader,
-  TableCell,
-  TableBody,
-  Table,
-} from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenuTrigger,
@@ -25,22 +14,22 @@ import {
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
 
-import { useState } from "react";
 import ThemeChanger from "@/components/old/theme-switch";
 
-type Item = {
-  id: string;
-  thumbnail: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import { columns } from "./columns";
+import { DataTable } from "@/components/data-table";
+import { useSignalValue } from "signals-react-safe";
+import { get } from "@/lib/requests";
 
 export default function Page() {
-  const router = useRouter();
-  const [items, setData] = useState(channels.value);
+  useEffect(() => {
+    (async () => {
+      const api_channels = await get("/youtube-channels");
+      channels.value = api_channels;
+    })();
+  }, []);
 
-  console.log(items);
+  const items = useSignalValue(channels);
 
   return (
     <>
@@ -49,18 +38,7 @@ export default function Page() {
           <MenuIcon className="h-6 w-6" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
-        <div className="w-full flex-1">
-          <form>
-            <div className="relative">
-              <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
-              <Input
-                className="w-full bg-white shadow-none appearance-none pl-8 md:w-2/3 lg:w-1/3 dark:bg-gray-950"
-                placeholder="Search channels..."
-                type="search"
-              />
-            </div>
-          </form>
-        </div>
+        <div className="w-full flex-1"></div>
         <ThemeChanger />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -107,30 +85,7 @@ export default function Page() {
       </header>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
         <div className="border shadow-sm rounded-lg">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[80px]">Image</TableHead>
-                <TableHead className="max-w-[150px]">Name</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {items.map((item: Item) => (
-                <TableRow key={item.id}>
-                  <TableCell>
-                    <Image
-                      className="rounded-full"
-                      alt="Logo of the Youtube channel"
-                      width={24}
-                      height={24}
-                      src={item.thumbnail}
-                    />
-                  </TableCell>
-                  <TableCell className="font-medium">{item.name}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <DataTable columns={columns} data={items} />
         </div>
       </main>
     </>

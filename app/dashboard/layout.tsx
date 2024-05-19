@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 
 import { Links } from "./links";
+import ClipboardCard from "@/components/clipboard-card";
 
 export default function DashboardLayout({
   children,
@@ -38,7 +39,8 @@ export default function DashboardLayout({
               <Links />
             </nav>
           </div>
-          <div className="mt-auto p-4">
+          <div className="mt-auto p-4 space-y-4">
+            <ClipboardCard />
             <Card>
               <a target="_blank" href="https://ko-fi.com/scriptingarthur">
                 <CardHeader className="pb-4">
