@@ -1,18 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import { post } from "@/lib/requests";
+import { useEffect } from "react";
 
 function DashboardLayout({ params: { token } }: { params: { token: String } }) {
-  const confirm = async () => {
+  useEffect(() => {
     try {
-      const resp = await post(
-        `/subscription/confirm/${token}`,
-        JSON.stringify({}),
-        {
-          "Content-Type": "application/json",
-        }
-      );
+      post(`/subscription/confirm/${token}`, JSON.stringify({}), {
+        "Content-Type": "application/json",
+      });
     } catch (error: any) {}
-  };
+  });
 
   return (
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-gray-100 px-4 py-12 dark:bg-gray-950">
