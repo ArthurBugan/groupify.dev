@@ -36,7 +36,7 @@ export default function ClipboardCard() {
       <CardHeader className="pb-4">
         <CardTitle>Donate Crypto</CardTitle>
         <CardDescription className="break-words">
-          Use the address below tod donate:{" "}
+          Use the address below to donate:{" "}
           <span className="font-bold">
             0x795AF809fDf39458ab5a49639793c1a10BFaFF7B
           </span>
