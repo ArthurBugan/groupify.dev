@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { channels } from "@/lib/signals";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
@@ -22,6 +21,7 @@ import { useSignalValue } from "signals-react-safe";
 import { get } from "@/lib/requests";
 
 export default function Page() {
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     (async () => {
       const api_channels = await get("/youtube-channels");
@@ -85,7 +85,7 @@ export default function Page() {
       </header>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
         <div className="border shadow-sm rounded-lg">
-          <DataTable columns={columns} data={items} />
+          <DataTable loading={loading} columns={columns} data={items} />
         </div>
       </main>
     </>
