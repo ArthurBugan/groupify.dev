@@ -46,6 +46,8 @@ import { groups, groups_channels, channels } from "@/lib/signals";
 import { useSignalValue } from "signals-react-safe";
 import { DeleteGroup } from "@/components/delete-group";
 import Link from "next/link";
+import { FcAddDatabase, FcEmptyFilter } from "react-icons/fc";
+import { Loader } from "@/components/ui/loader";
 
 type Item = {
   id: string;
@@ -58,6 +60,7 @@ type Item = {
 export default function Page() {
   const router = useRouter();
 
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [detect, setDetect] = useState<boolean>();
   const group = useSignalValue(groups);
   const channel = useSignalValue(groups_channels);
@@ -68,8 +71,10 @@ export default function Page() {
         const api_channels = await get("/youtube-channels");
         channels.value = api_channels;
 
+        setLoading(true);
         const data = await get(`/groups`);
         groups.value = data;
+        setLoading(false);
 
         let group_channel: any = {};
 
@@ -217,6 +222,7 @@ export default function Page() {
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
+
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
         <div className="border shadow-sm rounded-lg">
           <Table>
@@ -271,6 +277,21 @@ export default function Page() {
               ))}
             </TableBody>
           </Table>
+          {group.length === 0 && !isLoading && (
+            <div className="h-24 flex flex-col items-center justify-center">
+              <FcAddDatabase size={32} />
+              <span className="text-sm">
+                No groups found please register one to begin organizing your
+                channels.
+              </span>
+            </div>
+          )}
+          {isLoading && (
+            <div className="h-24 flex flex-col items-center justify-center">
+              <Loader />
+              <span className="text-sm mt-2">Loading your groups...</span>
+            </div>
+          )}
         </div>
         <EditGroup formValues={{ channels: [] }} type="add" />
       </main>
