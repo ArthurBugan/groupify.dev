@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { channels } from "@/lib/signals";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,11 +22,19 @@ import { useSignalValue } from "signals-react-safe";
 import { get } from "@/lib/requests";
 
 export default function Page() {
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     (async () => {
-      const api_channels = await get("/youtube-channels");
-      channels.value = api_channels;
+      try {
+        const api_channels = await get("/youtube-channels");
+        channels.value = api_channels;
+      } catch (error: any) {
+        if (error?.status === 401) {
+          return router.replace("/login");
+        }
+      }
     })();
   }, []);
 
