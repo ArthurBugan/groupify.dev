@@ -41,7 +41,7 @@ export default async function MdxLayout({
               </nav>
             </div>
           </div>
-          <div className="grid items-stretch gap-8">
+          <div className="grid items-stretch gap-8 mb-auto">
             <div className="flex items-center justify-center">
               <div className="grid grid-cols-1 pt-2 gap-8 p-8">
                 <div className="flex flex-row space-x-3">

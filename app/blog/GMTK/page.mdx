@@ -1,0 +1,66 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "GMTK: Game Maker's Toolkit",
+  description: `Explore GMTK, a YouTube channel that delves into the art of game design, offering in-depth analyses and insights to help developers create better games.`,
+  date: "May 20, 2024",
+  authors: ["Charlotte"],
+};
+
+<h1>GMTK: Game Maker's Toolkit</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on May 20, 2024
+</div>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    GMTK, or Game Maker's Toolkit, is a YouTube channel that delves into the art
+    of game design. The channel offers in-depth analyses and insights to help
+    developers create better games by understanding the principles and mechanics
+    that make games enjoyable and engaging.
+  </span>
+</section>
+
+<section id="content">
+  <h2>Content</h2>
+  <span>
+    The channel features a variety of videos that explore different aspects of
+    game design, from mechanics and storytelling to player psychology. Popular
+    series include "Designing for Accessibility" and "Boss Keys," which provide
+    detailed examinations of game design concepts and best practices.
+  </span>
+</section>
+
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    GMTK’s videos are well-produced, with high-quality visuals and audio that
+    enhance the presentation. The content is thoughtfully structured and
+    engaging, making it accessible to both novice and experienced game
+    developers.
+  </span>
+</section>
+
+<section id="impact">
+  <h2>Impact</h2>
+  <span>
+    The channel has become a respected source of knowledge in the game
+    development community. By offering expert analyses and practical advice,
+    GMTK has helped many developers improve their skills and create more
+    compelling games.
+  </span>
+</section>
+
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    GMTK is an essential resource for anyone interested in game design. With its
+    insightful content and high production values, the channel continues to
+    educate and inspire game developers around the world.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}

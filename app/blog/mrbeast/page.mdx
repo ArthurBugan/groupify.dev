@@ -1,0 +1,67 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "MrBeast: Changing Lives, One Video at a Time",
+  description: `Explore MrBeast, a YouTube channel known for its philanthropic acts, creative challenges, and entertaining content that captures the hearts of millions.`,
+  date: "May 20, 2024",
+  authors: ["Charlotte"],
+};
+
+<h1>MrBeast: Changing Lives, One Video at a Time</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on May 20, 2024
+</div>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    MrBeast is a YouTube channel known for its philanthropic acts, creative
+    challenges, and entertaining content. With a mission to change lives and
+    spread positivity, MrBeast captivates the hearts of millions of viewers
+    around the world.
+  </span>
+</section>
+
+<section id="content">
+  <h2>Content</h2>
+  <span>
+    The channel features a wide range of content, including philanthropic
+    giveaways, extreme challenges, and heartwarming acts of kindness. Popular
+    series include "Last To Leave" challenges and "Giving Away $1,000,000"
+    videos, which showcase MrBeast's generosity and creativity.
+  </span>
+</section>
+
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    MrBeast's videos are well-produced, with high-quality visuals and engaging
+    storytelling that keep viewers hooked from start to finish. The content is
+    meticulously crafted to entertain and inspire, creating a positive impact on
+    the lives of both participants and viewers alike.
+  </span>
+</section>
+
+<section id="impact">
+  <h2>Impact</h2>
+  <span>
+    MrBeast's philanthropic efforts have made a significant impact on
+    individuals and communities worldwide. From helping people in need to
+    supporting small businesses, MrBeast's acts of kindness have touched the
+    lives of millions, spreading hope and positivity in the process.
+  </span>
+</section>
+
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    MrBeast is more than just a YouTube channel; it's a force for good in the
+    world. Through his entertaining content and philanthropic endeavors, MrBeast
+    continues to change lives and inspire others to make a positive difference,
+    one video at a time.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}
