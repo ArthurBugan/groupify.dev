@@ -1,0 +1,66 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "Coding in Public: Open-Source Coding Tutorials",
+  description: `An in-depth look at Coding in Public, a YouTube channel where viewers can learn coding through open-source projects and tutorials.`,
+  date: "May 20, 2024",
+  authors: ["Charlotte"],
+};
+
+<h1>Coding in Public: Open-Source Coding Tutorials</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on May 20, 2024
+</div>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    Coding in Public is a YouTube channel that offers coding tutorials and
+    project walkthroughs, emphasizing open-source development. The channel aims
+    to make coding accessible and enjoyable for developers of all skill levels.
+  </span>
+</section>
+
+<section id="content">
+  <h2>Content</h2>
+  <span>
+    The channel covers a wide range of programming topics, including web
+    development, Python, JavaScript, and more. Tutorials often focus on building
+    real-world projects, giving viewers practical experience. Popular series
+    include "Build a Portfolio Website" and "Python for Beginners."
+  </span>
+</section>
+
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    Coding in Public videos are well-structured and easy to follow. Screen
+    recordings and clear narration guide viewers through each step of the coding
+    process. The use of visual aids and code snippets enhances understanding and
+    retention.
+  </span>
+</section>
+
+<section id="impact">
+  <h2>Impact</h2>
+  <span>
+    The channel has empowered many aspiring developers to start coding and
+    contribute to open-source projects. By providing free, high-quality
+    education, Coding in Public has fostered a supportive community of learners
+    and developers.
+  </span>
+</section>
+
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    Coding in Public is an invaluable resource for anyone looking to improve
+    their coding skills. Through its comprehensive tutorials and focus on
+    open-source development, the channel continues to inspire and educate a new
+    generation of programmers.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}

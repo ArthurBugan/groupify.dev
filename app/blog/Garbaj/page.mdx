@@ -1,0 +1,66 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "Garbaj: Practical Game Development Tutorials",
+  description: `Explore Garbaj, a YouTube channel offering practical game development tutorials and insights for aspiring game developers.`,
+  date: "May 20, 2024",
+  authors: ["Charlotte"],
+};
+
+<h1>Garbaj: Practical Game Development Tutorials</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on May 20, 2024
+</div>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    Garbaj is a YouTube channel that provides practical game development
+    tutorials and insights. The channel is dedicated to helping aspiring game
+    developers learn the skills and techniques needed to create their own games.
+  </span>
+</section>
+
+<section id="content">
+  <h2>Content</h2>
+  <span>
+    The channel offers a variety of tutorials, from basic programming to
+    advanced game design techniques. Popular videos include "Unity Game
+    Development for Beginners" and "Advanced Shader Programming," which provide
+    detailed instructions and practical examples to help viewers master game
+    development.
+  </span>
+</section>
+
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    Garbaj’s videos are well-produced, with clear visuals and audio that
+    facilitate learning. The tutorials are thoughtfully structured, providing
+    step-by-step guidance that makes complex topics accessible and easy to
+    understand.
+  </span>
+</section>
+
+<section id="impact">
+  <h2>Impact</h2>
+  <span>
+    The channel has helped many aspiring game developers improve their skills
+    and create their own games. By offering practical advice and detailed
+    tutorials, Garbaj has become a trusted resource in the game development
+    community.
+  </span>
+</section>
+
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    Garbaj is an invaluable resource for anyone interested in game development.
+    With its practical tutorials and high-quality content, the channel continues
+    to support and inspire a global audience of game developers.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}

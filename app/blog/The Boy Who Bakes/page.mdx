@@ -1,0 +1,67 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "The Boy Who Bakes: Baking Adventures with Edd Kimber",
+  description: `An in-depth look at The Boy Who Bakes, a YouTube channel where Edd Kimber shares his passion for baking through tutorials and recipes.`,
+  date: "May 20, 2024",
+  authors: ["Charlotte"],
+};
+
+<h1>The Boy Who Bakes: Baking Adventures with Edd Kimber</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on May 20, 2024
+</div>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    The Boy Who Bakes is a YouTube channel run by Edd Kimber, the first winner
+    of The Great British Bake Off. Edd shares his baking expertise through
+    detailed tutorials and delicious recipes, making it easy for viewers to
+    replicate his creations at home.
+  </span>
+</section>
+
+<section id="content">
+  <h2>Content</h2>
+  <span>
+    Edd Kimber covers a wide range of baking topics, from simple cookies and
+    cakes to more complex pastries and bread. His approachable style and clear
+    instructions make baking accessible to both beginners and experienced
+    bakers. Popular videos include his "Ultimate Chocolate Cake" and "Perfect
+    Sourdough Bread."
+  </span>
+</section>
+
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    The videos on The Boy Who Bakes are well-produced, with a focus on clarity
+    and detail. Edd ensures that each step of the baking process is thoroughly
+    explained and visually demonstrated, helping viewers achieve the best
+    results.
+  </span>
+</section>
+
+<section id="impact">
+  <h2>Impact</h2>
+  <span>
+    The Boy Who Bakes has inspired countless viewers to take up baking,
+    providing them with the skills and confidence to create their own baked
+    goods. Edd's engaging personality and passion for baking have cultivated a
+    loyal following and a vibrant online community.
+  </span>
+</section>
+
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    The Boy Who Bakes is a delightful resource for anyone interested in baking.
+    With Edd Kimber's expert guidance and friendly approach, the channel
+    continues to inspire home bakers around the world.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}

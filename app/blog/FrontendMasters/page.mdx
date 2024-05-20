@@ -1,0 +1,68 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "Frontend Masters: Advanced Web Development Training",
+  description: `Explore Frontend Masters, a YouTube channel offering advanced web development courses and tutorials from industry leaders.`,
+  date: "May 20, 2024",
+  authors: ["Charlotte"],
+};
+
+<h1>Frontend Masters: Advanced Web Development Training</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on May 20, 2024
+</div>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    Frontend Masters is a YouTube channel and online education platform that
+    offers advanced web development courses and tutorials. Featuring content
+    from industry leaders, the channel provides in-depth training on a wide
+    range of web development topics.
+  </span>
+</section>
+
+<section id="content">
+  <h2>Content</h2>
+  <span>
+    The channel covers various aspects of web development, including JavaScript
+    frameworks, CSS techniques, and web performance. Popular courses include
+    "Advanced React" and "Fullstack JavaScript," which provide comprehensive
+    training for developers looking to deepen their expertise. The content is
+    designed to help developers master the latest tools and technologies.
+  </span>
+</section>
+
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    Frontend Masters is known for its high-quality production, with clear audio
+    and video that enhance the learning experience. The professional
+    presentation and well-structured courses make it easy for viewers to follow
+    along and absorb the material.
+  </span>
+</section>
+
+<section id="impact">
+  <h2>Impact</h2>
+  <span>
+    The channel has significantly impacted the web development community by
+    providing accessible, high-quality education. It has empowered many
+    developers to advance their skills and stay current with industry trends,
+    contributing to their professional growth.
+  </span>
+</section>
+
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    Frontend Masters is an invaluable resource for web developers seeking
+    advanced training. With its expert-led courses and high production
+    standards, the channel continues to set the benchmark for online web
+    development education.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}
