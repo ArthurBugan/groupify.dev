@@ -1,0 +1,64 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "Angela Bright: Makeup Tutorials and Beauty Tips",
+  description: `Join Angela Bright on her YouTube channel as she shares makeup tutorials, beauty tips, and product reviews.`,
+  date: "May 20, 2024",
+  authors: ["Charlotte"],
+};
+
+<h1>Angela Bright: Makeup Tutorials and Beauty Tips</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on May 20, 2024
+</div>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    Angela Bright is a makeup artist who shares her expertise through her
+    YouTube channel. Angela provides makeup tutorials, beauty tips, and honest
+    product reviews for her viewers.
+  </span>
+</section>
+
+<section id="content">
+  <h2>Content</h2>
+  <span>
+    The channel features a variety of makeup tutorials, from everyday looks to
+    dramatic styles, as well as beauty tips and product reviews. Popular videos
+    include eye makeup tutorials, foundation routines, and skincare advice.
+  </span>
+</section>
+
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    Angela’s videos are high-quality, with detailed close-ups and clear
+    explanations. Her professional techniques and engaging personality make her
+    tutorials both informative and enjoyable.
+  </span>
+</section>
+
+<section id="impact">
+  <h2>Impact</h2>
+  <span>
+    Angela Bright has influenced many makeup enthusiasts with her creative looks
+    and practical beauty tips. Her channel helps viewers enhance their makeup
+    skills and stay updated on the latest beauty trends.
+  </span>
+</section>
+
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    Angela Bright’s YouTube channel is a must-watch for makeup lovers. Her
+    detailed tutorials and expert advice provide valuable insights for both
+    beginners and experienced makeup artists.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+
+
+}
