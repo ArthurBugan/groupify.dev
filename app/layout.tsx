@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Lexend } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body className={lexend.className}>
         {children}
         <Toaster />
+        <GoogleTagManager gtmId="GTM-WT9B57FM" />
       </body>
     </html>
   );
