@@ -1,0 +1,64 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "Ashlee Marie: Culinary Creations and Cake Decorating",
+  description: `Join Ashlee Marie on her YouTube channel as she shares her culinary creations, cake decorating tutorials, and cooking tips.`,
+  date: "May 20, 2024",
+  authors: ["Charlotte"],
+};
+
+<h1>Ashlee Marie: Culinary Creations and Cake Decorating</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on May 20, 2024
+</div>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    Ashlee Marie, a talented chef and cake decorator, shares her culinary
+    expertise on her YouTube channel. Ashlee provides detailed tutorials,
+    recipes, and tips for creating delicious and beautiful dishes.
+  </span>
+</section>
+
+<section id="content">
+  <h2>Content</h2>
+  <span>
+    The channel features a mix of cake decorating tutorials, cooking recipes,
+    and kitchen tips. Popular videos include fondant cake designs, homemade
+    bread recipes, and holiday cooking specials.
+  </span>
+</section>
+
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    Ashlee’s videos are high-quality, with clear instructions and beautiful
+    visuals. Her expert techniques and friendly demeanor make her tutorials both
+    informative and enjoyable.
+  </span>
+</section>
+
+<section id="impact">
+  <h2>Impact</h2>
+  <span>
+    Ashlee Marie has inspired many home cooks and aspiring bakers with her
+    creative recipes and decorating tips. Her channel helps viewers enhance
+    their cooking skills and create stunning cakes.
+  </span>
+</section>
+
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    Ashlee Marie’s YouTube channel is a valuable resource for anyone interested
+    in cooking and cake decorating. Her detailed tutorials and delicious recipes
+    make her a trusted source in the culinary community.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+
+
+}
