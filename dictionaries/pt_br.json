@@ -10,6 +10,7 @@
   },
   "navigation": ["Produto", "Funcionalidades"],
   "pages": [
+    { "name": "Quem somos", "slug": "about-us" },
     { "name": "Blog", "slug": "blog" },
     { "name": "Entrar / Cadastrar", "slug": "login" }
   ],
