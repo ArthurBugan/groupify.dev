@@ -4,7 +4,7 @@ import posthog from "posthog-js";
 import React, { useEffect, useState } from "react";
 
 const ThemeChanger = () => {
-  const [theme, setTheme] = useState("");
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     if (

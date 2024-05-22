@@ -10,6 +10,7 @@
   },
   "navigation": ["Product", "Features"],
   "pages": [
+    { "name": "About us", "slug": "about-us" },
     { "name": "Blog", "slug": "blog" },
     { "name": "Login / Registration", "slug": "login" }
   ],

@@ -22,8 +22,8 @@ export default async function Component() {
       <Navbar showLanguage={false} dictionary={dictionary} />
 
       <main className="container p-8 mx-auto xl:px-0 flex flex-wrap mb-20 lg:gap-10 lg:flex-nowrap">
-        <div className="grid grid-cols-[300px_1fr] gap-8">
-          <div className="sticky top-8 self-start space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8">
+          <div className="sticky top-8 self-start space-y-4 hidden lg:block">
             <div className="space-y-1">
               <h3 className="text-lg font-semibold">Blog posts</h3>
               <nav className="space-y-2 text-sm">
@@ -44,7 +44,7 @@ export default async function Component() {
               </nav>
             </div>
           </div>
-          <div className="grid items-stretch md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid items-stretch md:grid-cols-2 xl:grid-cols-3 gap-8">
             {articles.map((article) => {
               const { metadata } = article;
               const title = String(metadata.title);
