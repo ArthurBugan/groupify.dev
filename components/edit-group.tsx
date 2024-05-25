@@ -154,7 +154,10 @@ export function EditGroup({
         )}
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[800px]">
+      <DialogContent
+        onPointerDownOutside={(e) => e.preventDefault()}
+        className="sm:max-w-[800px]"
+      >
         <DialogHeader>
           <DialogTitle>
             {type === "add" ? "Add Group" : "Edit Group"}
