@@ -145,6 +145,7 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
           <CommandList>
             <CommandEmpty>{renderText()}</CommandEmpty>
             <VirtuosoGrid
+              overscan={900}
               className="virtuoso-scroller"
               listClassName="grid grid-cols-1 bg-white lg:block dark:bg-gray-800/40"
               totalCount={itemsCount}
