@@ -121,6 +121,7 @@ const Combobox: React.FC<ComboboxProps> = ({ name, className }) => {
               className="virtuoso-scroller"
               listClassName="grid grid-cols-4"
               totalCount={itemsCount}
+              overscan={900}
               itemContent={(index) => {
                 return (
                   <CommandItem
