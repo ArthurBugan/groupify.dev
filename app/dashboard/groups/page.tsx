@@ -34,6 +34,7 @@ import { groups, groups_channels, channels } from "@/lib/signals";
 import Link from "next/link";
 import { DataTable } from "@/components/data-table";
 import { EditGroup } from "@/components/edit-group";
+import { DeleteAccount } from "@/components/delete-account";
 
 type Item = {
   id: string;
@@ -50,6 +51,16 @@ export default function Page() {
   const [detect, setDetect] = useState<boolean>();
   const group = useSignalValue(groups);
   const channel = useSignalValue(groups_channels);
+
+  const logout = () => {
+    document.cookie.split(";").forEach(function (c) {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+
+    location.reload();
+  };
 
   useEffect(() => {
     function detectExtensionUsingImage(
@@ -84,6 +95,7 @@ export default function Page() {
         setLoading(true);
         const data = await get(`/groups`);
         groups.value = data;
+        setLoading(false);
 
         let group_channel: any = {};
 
@@ -123,6 +135,8 @@ export default function Page() {
       });
     })();
   }, []);
+
+  console.log(loading);
 
   return (
     <>
@@ -201,12 +215,12 @@ export default function Page() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DeleteAccount />
             <DropdownMenuSeparator />
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
