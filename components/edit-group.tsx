@@ -27,6 +27,7 @@ import { FormProvider, set, useFieldArray, useForm } from "react-hook-form";
 import { Combobox } from "./ui/combobox";
 import { get, post, put } from "@/lib/requests";
 import { groups, groups_channels } from "@/lib/signals";
+import { useSignalValue } from "signals-react-safe";
 
 const schema = z.object({
   channel: z.string().optional(),
@@ -68,6 +69,7 @@ export function EditGroup({
 }) {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
+  const group_channel = useSignalValue(groups_channels);
 
   const { ...methods } = useForm<Schema>({
     defaultValues: initialValues,
@@ -82,6 +84,15 @@ export function EditGroup({
     control: methods.control,
     name: "channels",
   });
+
+  useEffect(() => {
+    console.log(fields);
+    if (Array.isArray(fields) && fields.length > 0) {
+      append(groups_channels.value[formValues.id] || []);
+    } else {
+      replace(groups_channels.value[formValues.id] || []);
+    }
+  }, [group_channel]);
 
   useEffect(() => {
     if (open) {

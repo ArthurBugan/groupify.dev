@@ -8,6 +8,8 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { EditGroup } from "@/components/edit-group";
 import { DeleteGroup } from "@/components/delete-group";
+import { groups_channels } from "@/lib/signals";
+import { Loader } from "@/components/ui/loader";
 
 export type Item = {
   id: string;
@@ -58,6 +60,23 @@ export const columns: ColumnDef<Item>[] = [
           {new Date(row.getValue("updatedAt")).toLocaleTimeString()}
         </>
       );
+    },
+  },
+  {
+    accessorKey: "nChannels",
+    header: "Number of channels",
+    cell: ({ row }) => {
+      const items = groups_channels.value?.[row.original.id]?.length;
+
+      if (typeof items === "undefined") {
+        return (
+          <div className="flex items-start">
+            <Loader />
+          </div>
+        );
+      }
+
+      return items;
     },
   },
   {
