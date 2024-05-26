@@ -93,7 +93,12 @@ export default function Page() {
         </DropdownMenu>
       </header>
       <main className="flex flex-1 flex-col gap-4 p-4">
-        <DataTable loading={loading} columns={columns} data={items} />
+        <DataTable
+          emptyStateMessage="Visit youtube and wait for your channels sync, one they show here you can add them to groups, if this is list empty try to reload the page or visit youtube and wait a little longer"
+          loading={loading}
+          columns={columns}
+          data={items}
+        />
       </main>
     </>
   );

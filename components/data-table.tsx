@@ -28,12 +28,14 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   loading: boolean;
+  emptyStateMessage?: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   loading,
+  emptyStateMessage,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -114,7 +116,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-26 text-center"
                 >
-                  {loading ? <Loader /> : "No results."}
+                  {loading ? <Loader /> : emptyStateMessage || "No results."}
                 </TableCell>
               </TableRow>
             )}
