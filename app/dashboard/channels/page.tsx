@@ -21,6 +21,8 @@ import { DataTable } from "@/components/data-table";
 import { useSignalValue } from "signals-react-safe";
 import { get } from "@/lib/requests";
 
+import { DeleteAccount } from "@/components/delete-account";
+
 export default function Page() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
@@ -39,6 +41,16 @@ export default function Page() {
   }, []);
 
   const items = useSignalValue(channels);
+
+  const logout = () => {
+    document.cookie.split(";").forEach(function (c) {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+
+    location.reload();
+  };
 
   return (
     <>
@@ -83,12 +95,12 @@ export default function Page() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DeleteAccount />
             <DropdownMenuSeparator />
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
