@@ -1,0 +1,26 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "alicetv: A Unique Blend of Entertainment",
+  description: `A deep dive into alicetv, a YouTube channel that offers a unique blend of content.`,
+  date: "June 4, 2024",
+  authors: ["Charlotte"],
+};
+
+{" "}
+
+<h1>alicetv: A Unique Blend of Entertainment</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on June 4, 2024
+</div>
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    alicetv is a YouTube channel that offers a unique blend of content.
+    Unfortunately, there isn't much information available about this channel
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}
