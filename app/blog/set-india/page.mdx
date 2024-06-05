@@ -1,0 +1,79 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "SET India",
+  description: `Join SET India on their YouTube channel as they bring you the best of Indian television and entertainment.`,
+  date: "March 15, 2024",
+  authors: ["Charlotte"],
+};
+
+<h1>SET India</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By SET India | Published on March 15, 2024
+</div>
+
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    SET India is a popular Indian television channel that offers a wide range of
+    entertainment content to its viewers.
+  </span>
+</section>
+
+<section id="content">
+  <h2>Content</h2>
+  <span>
+    The channel features a variety of content, including:
+    <ul>
+      <li>Bollywood movies and TV shows</li>
+      <li>Lifestyle and entertainment programming</li>
+      <li>Reality TV shows and competitions</li>
+      <li>Celebrity interviews and behind-the-scenes footage</li>
+      <li>Music videos and concerts</li>
+    </ul>
+  </span>
+</section>
+
+<section id="production-quality">
+  <h2>Production Quality</h2>
+  <span>
+    SET India's videos are known for their high production quality, featuring
+    crisp visuals, engaging storytelling, and top-notch sound design.
+  </span>
+</section>
+
+<section id="statistics">
+  <h2>Statistics</h2>
+  <ul>
+    <li>
+      <strong>Subscribers:</strong> 5 million+
+      <br />
+      <strong>Views:</strong> 10 billion+
+      <br />
+      <strong>Videos:</strong> 20,000+
+    </li>
+  </ul>
+</section>
+
+<section id="achievements">
+  <h2>Achievements</h2>
+  <span>
+    SET India has been recognized as one of the leading television channels in
+    India, with a large following and millions of views on their videos. They
+    have also won several awards for their programming.
+  </span>
+</section>
+
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <span>
+    SET India's YouTube channel is a must-visit for anyone interested in Indian
+    television, movies, and entertainment. With their engaging content and high
+    production quality, it's no wonder why they're one of the most popular
+    channels on YouTube.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}

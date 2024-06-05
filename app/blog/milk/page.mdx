@@ -1,0 +1,27 @@
+import MdxLayout from "../mdx-layout";
+
+export const metadata = {
+  title: "Milk: A Blend of Gaming and Entertainment",
+  description: `A deep dive into Milk, a YouTube channel hosted by Millicent Sailor Ramsey, offering a unique blend of gaming content, vlogs, and promotional videos.`,
+  date: "June 4, 2024",
+  authors: ["Charlotte"],
+};
+
+{" "}
+
+<h1>Milk: A Blend of Gaming and Entertainment</h1>
+<div className="text-sm text-gray-500 dark:text-gray-400">
+  By Charlotte | Published on June 4, 2024
+</div>
+<section id="introduction">
+  <h2>Introduction</h2>
+  <span>
+    Milk is a YouTube channel hosted by the renowned Millicent Sailor Ramsey.
+    The channel offers a unique blend of gaming content, vlogs, and promotional
+    videos.
+  </span>
+</section>
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}
