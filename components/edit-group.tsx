@@ -28,6 +28,7 @@ import { Combobox } from "./ui/combobox";
 import { get, post, put } from "@/lib/requests";
 import { groups, groups_channels } from "@/lib/signals";
 import { useSignalValue } from "signals-react-safe";
+import { Loader } from "./ui/loader";
 
 const schema = z.object({
   channel: z.string().optional(),
@@ -261,7 +262,14 @@ export function EditGroup({
               onClick={methods.handleSubmit(onSubmit, onInvalid)}
               disabled={methods.formState.isSubmitting}
             >
-              Save Changes
+              {methods.formState.isSubmitting ? (
+                <>
+                  {" "}
+                  <p className="text-sm">Please wait...</p> <Loader />
+                </>
+              ) : (
+                "Save Changes"
+              )}
             </Button>
           </DialogClose>
         </DialogFooter>
