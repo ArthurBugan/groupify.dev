@@ -62,6 +62,10 @@ export default function Page() {
     location.reload();
   };
 
+  const support = () => {
+    window.open("mailto:arthurbugan@gmail.com");
+  };
+
   useEffect(() => {
     function detectExtensionUsingImage(
       extensionId: string | undefined,
@@ -217,8 +221,7 @@ export default function Page() {
           <DropdownMenuContent align="end">
             <DeleteAccount />
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
+            <DropdownMenuItem onClick={support}>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
