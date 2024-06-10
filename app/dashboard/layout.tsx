@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 
 import { Links } from "./links";
-import ClipboardCard from "@/components/clipboard-card";
 
 export default function DashboardLayout({
   children,
