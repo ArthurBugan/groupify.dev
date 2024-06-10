@@ -42,8 +42,10 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
 
   const itemsCount = React.useMemo(() => {
     const filterCount = (items: any) => {
-      return items.filter((i: any) =>
-        i.name.toLowerCase().includes(filter.toLowerCase())
+      return items.filter(
+        (i: any) =>
+          i?.name?.toLowerCase().includes(filter.toLowerCase()) ||
+          i?.url?.toLowerCase().includes(filter.toLowerCase())
       ).length;
     };
 
@@ -65,8 +67,10 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
 
   const items = React.useMemo(() => {
     const filterCount = (items: any) => {
-      return items.filter((i: any) =>
-        i.name.toLowerCase().includes(filter.toLowerCase())
+      return items.filter(
+        (i: any) =>
+          i?.name?.toLowerCase().includes(filter.toLowerCase()) ||
+          i?.url?.toLowerCase().includes(filter.toLowerCase())
       );
     };
 

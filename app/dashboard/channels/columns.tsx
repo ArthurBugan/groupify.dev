@@ -34,9 +34,25 @@ export const columns: ColumnDef<Item>[] = [
   {
     accessorKey: "createdAt",
     header: "Created at",
+    cell: ({ row }) => {
+      return (
+        <>
+          {new Date(row.getValue("createdAt")).toLocaleDateString()}{" "}
+          {new Date(row.getValue("createdAt")).toLocaleTimeString()}
+        </>
+      );
+    },
   },
   {
     accessorKey: "updatedAt",
     header: "Updated at",
+    cell: ({ row }) => {
+      return (
+        <>
+          {new Date(row.getValue("updatedAt")).toLocaleDateString()}{" "}
+          {new Date(row.getValue("updatedAt")).toLocaleTimeString()}
+        </>
+      );
+    },
   },
 ];

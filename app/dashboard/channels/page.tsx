@@ -22,6 +22,7 @@ import { useSignalValue } from "signals-react-safe";
 import { get } from "@/lib/requests";
 
 import { DeleteAccount } from "@/components/delete-account";
+import Link from "next/link";
 
 export default function Page() {
   const router = useRouter();
@@ -50,6 +51,10 @@ export default function Page() {
     });
 
     location.reload();
+  };
+
+  const support = () => {
+    window.open("https://www.youtube.com/watch?v=qPte0llTKM0");
   };
 
   return (
@@ -95,16 +100,26 @@ export default function Page() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DeleteAccount />
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
+            <DropdownMenuItem onClick={support}>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DeleteAccount />
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
       <main className="flex flex-1 flex-col gap-4 p-4">
+        <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
+          Here you can see all your chnnels, to add them to{" "}
+          <Link
+            className="text-sm font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+            href="/dashboard/groups"
+          >
+            Groups
+          </Link>{" "}
+          Click on Edit Icon and inside the Edit Group Modal and click on "Add
+          new channel" input.
+        </p>
         <DataTable
           emptyStateMessage="Visit youtube and wait for your channels sync, one they show here you can add them to groups, if this is list empty try to reload the page or visit youtube and wait a little longer"
           loading={loading}

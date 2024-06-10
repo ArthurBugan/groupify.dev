@@ -63,7 +63,7 @@ export default function Page() {
   };
 
   const support = () => {
-    window.open("mailto:arthurbugan@gmail.com");
+    window.open("https://www.youtube.com/watch?v=qPte0llTKM0");
   };
 
   useEffect(() => {
@@ -219,11 +219,11 @@ export default function Page() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DeleteAccount />
-            <DropdownMenuSeparator />
             <DropdownMenuItem onClick={support}>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DeleteAccount />
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
