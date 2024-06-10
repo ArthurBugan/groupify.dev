@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 
 import { Links } from "./links";
-import ClipboardCard from "@/components/clipboard-card";
 
 export default function DashboardLayout({
   children,
@@ -40,14 +39,32 @@ export default function DashboardLayout({
             </nav>
           </div>
           <div className="mt-auto p-4 space-y-4">
-            <ClipboardCard />
+            <Card>
+              <a
+                target="_blank"
+                href="https://patreon.com/scriptingarthur?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink"
+              >
+                <CardHeader className="pb-4">
+                  <CardTitle>Join My Patreon!</CardTitle>
+                  <CardDescription>
+                    Enjoy my work? Join my Patreon for exclusive content and
+                    perks. Your support helps me create more of what you love.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button className="w-full" size="sm">
+                    Donate via Patreon
+                  </Button>
+                </CardContent>
+              </a>
+            </Card>
             <Card>
               <a target="_blank" href="https://ko-fi.com/scriptingarthur">
                 <CardHeader className="pb-4">
-                  <CardTitle>Donate</CardTitle>
+                  <CardTitle>Support My Work on Ko-fi!</CardTitle>
                   <CardDescription>
-                    Unlock all features and get unlimited access to our support
-                    team
+                    Love my content? Buy me a coffee on Ko-fi! Your support
+                    keeps me motivated and helps fund my next big project.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
