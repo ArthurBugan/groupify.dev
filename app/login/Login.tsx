@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -11,9 +11,15 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { PasswordInput } from "@/components/ui/password-input";
 
+import { language } from "@/lib/signals";
+
 import { post } from "@/lib/requests";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useSignalValue } from "signals-react-safe";
+
+import pt from "../../dictionaries/pt.json";
+import en from "../../dictionaries/en.json";
 
 type Inputs = {
   email: string;
@@ -23,7 +29,17 @@ type Inputs = {
 const Login = () => {
   const [error, setError] = useState({ error: "" });
   const [loading, setLoading] = useState(false);
+  const lang = useSignalValue(language);
+
   const router = useRouter();
+
+  let dictionary;
+
+  if (lang === "pt") {
+    dictionary = pt;
+  } else {
+    dictionary = en;
+  }
 
   const {
     register,
@@ -54,7 +70,7 @@ const Login = () => {
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold">Login</h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Enter your email and password to access your account.
+            {dictionary.login.description}
           </p>
         </div>
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -69,11 +85,11 @@ const Login = () => {
             />
           </div>
           <div>
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password"> {dictionary.login.password} </Label>
             <PasswordInput id="password" required {...register("password")} />
           </div>
           <Button disabled={loading} className="w-full" type="submit">
-            Sign in
+            {dictionary.login.signin}
           </Button>
         </form>
         <p className="text-center text-sm text-gray-500 dark:text-gray-400">
@@ -81,24 +97,22 @@ const Login = () => {
             className="text-sm font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
             href="/forget-password"
           >
-            Forgot Password?
+            {dictionary.login.forget_password}
           </Link>
         </p>
         <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-          Don't have an account?{" "}
+          {dictionary.login.no_account}{" "}
           <Link
             className="text-sm font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
             href="/register"
           >
-            Register
+            {dictionary.login.register}
           </Link>
         </p>
         {error.error && (
           <Alert variant="default">
-            <AlertTitle>Oops, something went wrong!</AlertTitle>
-            <AlertDescription>
-              Please check your email and password and try again.
-            </AlertDescription>
+            <AlertTitle>{dictionary.login.error_title}</AlertTitle>
+            <AlertDescription>{dictionary.login.error_body}</AlertDescription>
           </Alert>
         )}
         {loading && <Loader />}

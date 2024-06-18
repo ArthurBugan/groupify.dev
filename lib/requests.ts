@@ -7,6 +7,7 @@ const get = async (url: string, headers: any = {}) => {
       credentials: 'include',
       method: 'GET',
       headers: {
+        ...headers,
         "Content-Type": "application/json",
       }
     });

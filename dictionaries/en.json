@@ -42,5 +42,16 @@
   "footer": {
     "title": "Groupify is a free browser extension for chromium based browsers to manage your Youtube subscribers list. Its built with Plasmo & TailwindCSS",
     "follow": "Follow us"
+  },
+
+  "login": {
+    "description": "Enter your email and password to access your account.",
+    "password": "Password",
+    "signin": "Sign in",
+    "forget_password": "Forget Password?",
+    "no_account": "Don`t have an account?",
+    "register": "Register",
+    "error_title": "Oops, something went wrong!",
+    "error_body": "Please check your email and password and try again."
   }
 }

@@ -1,10 +1,20 @@
 "use client";
+import { get } from "@/lib/requests";
 import posthog from "posthog-js";
 
 import React, { useEffect, useState } from "react";
+import { language } from "@/lib/signals";
 
 const ThemeChanger = () => {
   const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    get("/language").then((data) => {
+      if (data) {
+        language.value = data.language;
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (
