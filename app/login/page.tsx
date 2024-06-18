@@ -15,7 +15,7 @@ export default async function LoginPage({
 
   return (
     <>
-      <Navbar showLanguage={false} dictionary={dictionary} />
+      <Navbar dictionary={dictionary} />
       <Login />
     </>
   );

@@ -11,6 +11,8 @@ const icons = signal(Object.keys(LibraryIcons)
 
 const groups = signal([]);
 
+const language: any = signal({});
+
 const groups_channels: any = signal({})
 
-export { channels, icons, groups, groups_channels };
+export { channels, icons, groups, groups_channels, language };

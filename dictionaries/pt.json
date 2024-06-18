@@ -1,5 +1,5 @@
 {
-  "lang": "pt-BR",
+  "lang": "pt",
   "hero": {
     "title": "Agrupe seus canais",
     "span": "facilmente",
@@ -42,5 +42,16 @@
   "footer": {
     "title": "Groupify é uma extensão gratuita para navegadores baseados em Chromium para gerenciar sua lista de inscritos do YouTube. É construído com Plasmo e TailwindCSS",
     "follow": "Nos acompanhe"
+  },
+
+  "login": {
+    "description": "Digite seu email e senha para acessar sua conta.",
+    "password": "Senha",
+    "signin": "Entrar",
+    "forget_password": "Esqueceu a senha?",
+    "no_account": "Não tem uma conta?",
+    "register": "Registrar",
+    "error_title": "Oops, algo deu errado!",
+    "error_body": "Por favor, verifique seu e-mail e tente novamente mais tarde."
   }
 }

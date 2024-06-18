@@ -3,7 +3,7 @@ import ThemeChanger from "./theme-switch";
 import MobileNavBar from "./mobile-navbar";
 import Image from "next/image";
 
-const Navbar = ({ dictionary, showLanguage = true }: any) => {
+const Navbar = ({ dictionary }: any) => {
   return (
     <div className="w-full">
       <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
@@ -24,7 +24,7 @@ const Navbar = ({ dictionary, showLanguage = true }: any) => {
           </Link>
         </div>
         {/* Logo Mobile  */}
-        <MobileNavBar showLanguage={showLanguage} dictionary={dictionary} />
+        <MobileNavBar dictionary={dictionary} />
 
         <div className="hidden text-center lg:flex flex-initial lg:items-center">
           <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">

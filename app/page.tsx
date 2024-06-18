@@ -6,8 +6,8 @@ import Video from "@/components/old/video";
 import Faq from "@/components/old/faq";
 import Cta from "@/components/old/cta";
 import Footer from "@/components/old/footer";
+import { headers } from "next/headers";
 
-import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
 import {
   benefitOne,
@@ -15,13 +15,18 @@ import {
   benefitOnePT,
   benefitTwoPT,
 } from "@/components/old/data";
+import { get } from "@/lib/requests";
+import type { Locale } from "../i18n-config";
 
-export default async function Home({
-  params: { lang },
-}: {
-  params: { lang: Locale };
-}) {
-  const dictionary = await getDictionary(lang);
+export default async function Home() {
+  const headersList = headers();
+  const accept = headersList.get("accept-language");
+
+  const locale: { language: Locale } = await get("/language", {
+    "accept-language": accept,
+  });
+
+  const dictionary = await getDictionary(locale?.language);
 
   return (
     <>
@@ -38,10 +43,10 @@ export default async function Home({
       </SectionTitle>
 
       <p id={dictionary.navigation[0]} />
-      <Benefits data={dictionary.lang == "pt-BR" ? benefitOnePT : benefitOne} />
+      <Benefits data={dictionary.lang == "pt" ? benefitOnePT : benefitOne} />
       <Benefits
         imgPos="right"
-        data={dictionary.lang == "pt-BR" ? benefitTwoPT : benefitTwo}
+        data={dictionary.lang == "pt" ? benefitTwoPT : benefitTwo}
       />
 
       <p id={dictionary.navigation[1]} />
