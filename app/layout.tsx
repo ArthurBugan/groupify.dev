@@ -49,6 +49,10 @@ export default function RootLayout({
         {children}
         <Toaster />
         <GoogleTagManager gtmId="GTM-WT9B57FM" />
+        <script id="hydro_config" type="text/javascript">
+          window.Hydro_tagId = "7382a7f2-3a15-417b-8a28-eb6ecc66733d";
+        </script>
+        <script id="hydro_script" src="https://track.hydro.online/"></script>
       </body>
     </html>
   );
