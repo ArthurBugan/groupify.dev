@@ -2,6 +2,7 @@ import "./globals.css";
 import { Lexend } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -44,15 +45,14 @@ export default function RootLayout({
         <meta name="application-name" content="&nbsp;" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-TileImage" content="mstile.png" />
+
+        <Script id="hydro_config">{`window.Hydro_tagId = "7382a7f2-3a15-417b-8a28-eb6ecc66733d"`}</Script>
+        <Script id="hydro_script" src="https://track.hydro.online/"></Script>
       </head>
       <body className={lexend.className}>
         {children}
         <Toaster />
         <GoogleTagManager gtmId="GTM-WT9B57FM" />
-        <script id="hydro_config" type="text/javascript">
-          window.Hydro_tagId = "7382a7f2-3a15-417b-8a28-eb6ecc66733d";
-        </script>
-        <script id="hydro_script" src="https://track.hydro.online/"></script>
       </body>
     </html>
   );
