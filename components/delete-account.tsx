@@ -35,7 +35,7 @@ export function DeleteAccount() {
     });
 
     setTimeout(() => {
-      location.reload();
+      location.href = "https://groupify.dev";
     }, 3000);
   };
 
