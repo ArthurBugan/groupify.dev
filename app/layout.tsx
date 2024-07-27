@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Lexend } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
-import { GoogleTagManager } from "@next/third-parties/google";
 
 import Script from "next/script";
 
@@ -53,8 +52,24 @@ export default function RootLayout({
       <body className={lexend.className}>
         {children}
         <Toaster />
-        <GoogleTagManager gtmId="AW-16654930387" />
-        <GoogleTagManager gtmId="G-D7BS3V6VJF" />
+        <Script id="gtm" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','G-D7BS3V6VJF');
+          `}
+        </Script>
+        <Script id="gtm2" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','AW-16654930387');
+          `}
+        </Script>
       </body>
     </html>
   );
