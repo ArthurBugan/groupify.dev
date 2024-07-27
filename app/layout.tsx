@@ -53,7 +53,6 @@ export default function RootLayout({
       <body className={lexend.className}>
         {children}
         <Toaster />
-        <GoogleTagManager gtmId="GTM-WT9B57FM" />
         <GoogleTagManager gtmId="AW-16654930387" />
       </body>
     </html>
