@@ -121,7 +121,9 @@ export default function Page() {
         }
       }
     })();
+  }, []);
 
+  useEffect(() => {
     (async () => {
       let decodedCookie = decodeURIComponent(document.cookie);
       let ca = decodedCookie.split(";");
