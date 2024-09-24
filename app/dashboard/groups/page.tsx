@@ -71,6 +71,10 @@ export default function Page() {
       extensionId: string | undefined,
       callback: Function
     ) {
+      if (navigator.userAgent.indexOf("Safari") != -1) {
+        return false;
+      }
+
       const img = new Image();
       const src = `chrome-extension://${extensionId}/assets/icon.png`;
       img.src = src;
