@@ -77,7 +77,7 @@ export default function DashboardLayout({
           </div>
         </div>
       </div>
-      <div className="flex flex-col">{children}</div>
+      <div className="flex flex-col w-screen lg:w-auto">{children}</div>
     </div>
   );
 }
