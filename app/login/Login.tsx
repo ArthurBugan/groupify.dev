@@ -65,8 +65,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen w-full items-center justify-center">
-      <div className="w-full max-w-md space-y-6 rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
+    <div className="flex h-screen w-screen sm:w-full items-center justify-center">
+      <div className="max-w-sm m-6 space-y-6 rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold">Login</h1>
           <p className="text-gray-500 dark:text-gray-400">
