@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
+import { FaFirefoxBrowser, FaSafari } from "react-icons/fa6";
 
 const Footer = ({ dictionary }: any) => {
   return (
@@ -60,8 +61,26 @@ const Footer = ({ dictionary }: any) => {
               target="_blank"
               rel="noopener"
             >
-              <span className="sr-only">Facebook</span>
+              <span className="sr-only">Chrome</span>
               <WebStore />
+            </a>
+            <a
+              className="dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-slate-700"
+              href="https://addons.mozilla.org/en-US/firefox/addon/groupify-yt-organize/?utm_source=groupify-lp"
+              target="_blank"
+              rel="noopener"
+            >
+              <span className="sr-only">Firefox</span>
+              <FaFirefoxBrowser size={24} />
+            </a>
+            <a
+              className="dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-slate-700"
+              href="https://apps.apple.com/br/app/groupify-yt-subscriptions/id6714452813?l=en-GB?utm_source=groupify-lp"
+              target="_blank"
+              rel="noopener"
+            >
+              <span className="sr-only">Safari</span>
+              <FaSafari size={24} />
             </a>
             <a
               className="dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-slate-700"
