@@ -32,7 +32,7 @@ export function Links() {
       </Link>
       <Link
         className={twMerge(
-          path.includes("channels") && "bg-gray-100 dark:bg-gray-800",
+          path.includes("tutorial") && "bg-gray-100 dark:bg-gray-800",
           "flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900  transition-all hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-50"
         )}
         target="_blank"

@@ -75,6 +75,10 @@ export default function Page() {
         return false;
       }
 
+      if (navigator.userAgent.indexOf("Firefox") != -1) {
+        return;
+      }
+
       const img = new Image();
       const src = `chrome-extension://${extensionId}/assets/icon.png`;
       img.src = src;
