@@ -1,4 +1,6 @@
+import { FaFirefoxBrowser, FaSafari } from "react-icons/fa6";
 import Container from "./container";
+import { Chrome } from "lucide-react";
 
 const Hero = ({ dictionary }: any) => {
   return (
@@ -20,36 +22,58 @@ const Hero = ({ dictionary }: any) => {
             </span>{" "}
             {dictionary.hero.title_end}
           </h1>
+
           <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight dark:text-slate-300 text-slate-700">
             {dictionary.hero.subtitle}
           </p>
+
           <div className="mt-10 flex justify-center gap-x-6">
             <a
-              target="_blank"
               className="group inline-flex ring-1 items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none ring-indigo-600 bg-indigo-600 hover:bg-indigo-600 dark:text-slate-300 text-slate-200 dark:hover:text-slate-100 hover:text-slate-400 hover:ring-indigo-900 active:bg-slate-100 active:text-slate-600 focus-visible:outline-blue-600 focus-visible:ring-slate-300"
               href="https://chrome.google.com/webstore/detail/groupify/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=groupify-lp"
+              target="_blank"
+              rel="noopener"
             >
-              {dictionary.hero.install}
+              <span className="sr-only">Chrome</span>
+              <Chrome />
             </a>
             <a
+              className="group inline-flex ring-1 items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none ring-indigo-600 bg-indigo-600 hover:bg-indigo-600 dark:text-slate-300 text-slate-200 dark:hover:text-slate-100 hover:text-slate-400 hover:ring-indigo-900 active:bg-slate-100 active:text-slate-600 focus-visible:outline-blue-600 focus-visible:ring-slate-300"
+              href="https://addons.mozilla.org/en-US/firefox/addon/groupify-yt-organize/?utm_source=groupify-lp"
               target="_blank"
-              className="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-slate-900 text-white hover:bg-slate-700 hover:text-slate-100 dark:active:bg-slate-200 active:bg-slate-800 active:text-slate-300 dark:focus-visible:outline-slate-100 focus-visible:outline-slate-900"
-              href="https://github.com/ArthurBugan/groupify"
+              rel="noopener"
             >
-              <svg
-                aria-hidden="true"
-                height="16"
-                viewBox="0 0 16 16"
-                version="1.1"
-                width="16"
-                data-view-component="true"
-                className="fill-blue-600 group-active:fill-current"
-              >
-                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"></path>
-              </svg>
-              <span className="ml-3">{dictionary.hero.star}</span>
+              <span className="sr-only">Firefox</span>
+              <FaFirefoxBrowser size={24} />
+            </a>
+            <a
+              className="group inline-flex ring-1 items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none ring-indigo-600 bg-indigo-600 hover:bg-indigo-600 dark:text-slate-300 text-slate-200 dark:hover:text-slate-100 hover:text-slate-400 hover:ring-indigo-900 active:bg-slate-100 active:text-slate-600 focus-visible:outline-blue-600 focus-visible:ring-slate-300"
+              href="https://apps.apple.com/br/app/groupify-yt-subscriptions/id6714452813?l=en-GB?utm_source=groupify-lp"
+              target="_blank"
+              rel="noopener"
+            >
+              <span className="sr-only">Safari</span>
+              <FaSafari size={24} />
             </a>
           </div>
+          <a
+            target="_blank"
+            className="group mt-10 inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-slate-900 text-white hover:bg-slate-700 hover:text-slate-100 dark:active:bg-slate-200 active:bg-slate-800 active:text-slate-300 dark:focus-visible:outline-slate-100 focus-visible:outline-slate-900"
+            href="https://github.com/ArthurBugan/groupify"
+          >
+            <svg
+              aria-hidden="true"
+              height="16"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              data-view-component="true"
+              className="fill-blue-600 group-active:fill-current"
+            >
+              <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"></path>
+            </svg>
+            <span className="ml-3">{dictionary.hero.star}</span>
+          </a>
         </div>
       </Container>
     </>

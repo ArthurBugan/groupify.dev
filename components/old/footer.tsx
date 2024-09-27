@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { FaFirefoxBrowser, FaSafari } from "react-icons/fa6";
+import { Chrome } from "lucide-react";
 
 const Footer = ({ dictionary }: any) => {
   return (
@@ -62,7 +63,7 @@ const Footer = ({ dictionary }: any) => {
               rel="noopener"
             >
               <span className="sr-only">Chrome</span>
-              <WebStore />
+              <Chrome />
             </a>
             <a
               className="dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-slate-700"
