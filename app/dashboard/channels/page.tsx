@@ -54,7 +54,7 @@ export default function Page() {
   };
 
   const support = () => {
-    window.open("https://www.youtube.com/watch?v=qPte0llTKM0");
+    window.open("https://www.youtube.com/watch?v=2S1y5RxFUMc");
   };
 
   return (
