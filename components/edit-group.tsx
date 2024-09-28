@@ -87,7 +87,6 @@ export function EditGroup({
   });
 
   useEffect(() => {
-    console.log(fields);
     if (Array.isArray(fields) && fields.length > 0) {
       append(groups_channels.value[formValues.id] || []);
     } else {
@@ -220,12 +219,6 @@ export function EditGroup({
                     size="sm"
                     onClick={() => {
                       const values = methods.getValues();
-
-                      console.log({
-                        id: c.id,
-                        group_id: values.id,
-                        userId: values.userId,
-                      });
                       return remove(index);
                     }}
                     variant="secondary"
