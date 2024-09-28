@@ -1,6 +1,6 @@
-import { Check, ChevronsUpDown } from "lucide-react";
 import * as React from "react";
-import { useController, useFormContext } from "react-hook-form";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { useController } from "react-hook-form";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import { Button } from "@/components/ui/button";
@@ -10,18 +10,13 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import {
-  DynamicIcon,
-  type Library,
-  LibraryIcons,
-  returnLibraryIcons,
-} from "@/components/ui/icon";
+import { Icon } from "@iconify-icon/react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn, getFamily } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface ComboboxProps {
   className?: string;
@@ -32,42 +27,31 @@ let timer: any;
 const Combobox: React.FC<ComboboxProps> = ({ name, className }) => {
   const [open, setOpen] = React.useState(false);
   const [filter, setFilter] = React.useState<string>("");
-
-  const itemsCount = React.useMemo(() => {
-    if (filter.length > 0) {
-      return Object.keys(LibraryIcons)
-        .map((framework) =>
-          Object.keys(returnLibraryIcons(framework as Library))
-        )
-        .flat()
-        .filter((i) => i.toLowerCase().includes(filter.toLowerCase())).length;
-    }
-
-    return Object.keys(LibraryIcons)
-      .map((framework) => Object.keys(returnLibraryIcons(framework as Library)))
-      .flat().length;
-  }, [filter]);
-
-  const items = React.useMemo(() => {
-    if (filter.length > 0) {
-      return Object.keys(LibraryIcons)
-        .map((framework) =>
-          Object.keys(returnLibraryIcons(framework as Library))
-        )
-        .flat()
-        .filter((i) => i.toLowerCase().includes(filter.toLowerCase()));
-    }
-
-    return Object.keys(LibraryIcons)
-      .map((framework) => Object.keys(returnLibraryIcons(framework as Library)))
-      .flat();
-  }, [filter]);
+  const [items, setItems] = React.useState<string[]>([]);
 
   const {
     field,
     fieldState: { invalid, isTouched, isDirty, error },
     formState: { isSubmitting },
   } = useController({ name });
+
+  React.useEffect(() => {
+    (async () => {
+      const resp = await (
+        await fetch(
+          `https://api.iconify.design/collection?prefix=twemoji&chars=true&aliases=true`
+        )
+      ).json();
+
+      setItems(
+        Object.values(resp?.categories)
+          .flat()
+          .map((i) => "twemoji:" + i)
+      );
+    })();
+  }, []);
+
+  const parentRef = React.useRef(null);
 
   return (
     <Popover
@@ -87,11 +71,7 @@ const Combobox: React.FC<ComboboxProps> = ({ name, className }) => {
           {field.value ? (
             <p className="flex flex-row items-center justify-center">
               <span className="hidden">{field.value}</span>
-              <DynamicIcon
-                lib={getFamily(field.value)}
-                size={30}
-                icon={field.value}
-              />
+              <Icon icon={field.value} className="text-3xl" />
             </p>
           ) : (
             "Icons..."
@@ -101,31 +81,38 @@ const Combobox: React.FC<ComboboxProps> = ({ name, className }) => {
       </PopoverTrigger>
 
       <PopoverContent className="w-[15rem] p-0 bg-primary">
-        <Command className="w-full">
+        <Command className="w-full" ref={parentRef}>
           <input
             className="flex h-10 w-full rounded-md border border-input bg-white dark:bg-gray-800/40 px-3 text-primary py-2 text-xl ring-offset-background file:border-0 file:bg-transparent file:text-xl file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-            onChange={(e) => {
+            onChange={async (e) => {
               clearTimeout(timer);
 
-              timer = setTimeout(() => {
+              timer = setTimeout(async () => {
                 setFilter(e.target.value);
                 clearTimeout(timer);
+
+                const resp = await (
+                  await fetch(
+                    `https://api.iconify.design/search?query=${e.target.value}&limit=200`
+                  )
+                ).json();
+                setItems(resp?.icons);
               }, 500);
             }}
             placeholder="Search icon.."
           />
 
           <CommandList>
-            <CommandEmpty>No icon found...</CommandEmpty>
-            <VirtuosoGrid
-              className="virtuoso-scroller"
-              listClassName="grid grid-cols-4"
-              totalCount={itemsCount}
-              overscan={900}
-              itemContent={(index) => {
-                return (
+            <>
+              <CommandEmpty>No icon found...</CommandEmpty>
+              <VirtuosoGrid
+                className="virtuoso-scroller"
+                listClassName="grid grid-cols-4"
+                totalCount={items.length}
+                overscan={555}
+                itemContent={(index) => (
                   <CommandItem
-                    className="w-full justify-center items-center"
+                    className="w-full justify-center items-center h-6 mt-4"
                     key={items[index]}
                     title={items[index]}
                     value={items[index]}
@@ -142,15 +129,11 @@ const Combobox: React.FC<ComboboxProps> = ({ name, className }) => {
                           : "hidden opacity-0"
                       )}
                     />
-                    <DynamicIcon
-                      size={36}
-                      lib={getFamily(items[index])}
-                      icon={items[index]}
-                    />
+                    <Icon className="text-3xl" noobserver icon={items[index]} />
                   </CommandItem>
-                );
-              }}
-            />
+                )}
+              />
+            </>
           </CommandList>
         </Command>
       </PopoverContent>

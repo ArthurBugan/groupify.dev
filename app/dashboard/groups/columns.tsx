@@ -2,8 +2,6 @@
 
 import { DynamicIcon } from "@/components/ui/icon";
 
-import { getFamily } from "@/lib/utils";
-
 import { ColumnDef } from "@tanstack/react-table";
 
 import { EditGroup } from "@/components/edit-group";
@@ -26,11 +24,7 @@ export const columns: ColumnDef<Item>[] = [
     header: "Icon",
     cell: ({ row }) => {
       return (
-        <DynamicIcon
-          className="text-primary"
-          lib={getFamily(row.getValue("icon"))}
-          icon={row.getValue("icon")}
-        />
+        <DynamicIcon className="text-primary" icon={row.getValue("icon")} />
       );
     },
   },

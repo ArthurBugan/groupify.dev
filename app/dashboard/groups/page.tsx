@@ -150,8 +150,6 @@ export default function Page() {
     })();
   }, []);
 
-  console.log(loading);
-
   return (
     <>
       <Dialog modal={true} open={detect === false}>
