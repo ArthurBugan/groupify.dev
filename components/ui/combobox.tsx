@@ -96,6 +96,7 @@ const Combobox: React.FC<ComboboxProps> = ({ name, className }) => {
                     `https://api.iconify.design/search?query=${e.target.value}&limit=200`
                   )
                 ).json();
+
                 setItems(resp?.icons);
               }, 500);
             }}
@@ -108,28 +109,32 @@ const Combobox: React.FC<ComboboxProps> = ({ name, className }) => {
               <VirtuosoGrid
                 className="virtuoso-scroller"
                 listClassName="grid grid-cols-4"
-                totalCount={items.length}
+                totalCount={items?.length}
                 overscan={555}
                 itemContent={(index) => (
                   <CommandItem
                     className="w-full justify-center items-center h-6 mt-4"
-                    key={items[index]}
-                    title={items[index]}
-                    value={items[index]}
+                    key={items?.[index]}
+                    title={items?.[index]}
+                    value={items?.[index]}
                     onSelect={() => {
-                      field.onChange(items[index]);
+                      field.onChange(items?.[index]);
                       setOpen(false);
                     }}
                   >
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        field.value === items[index]
+                        field.value === items?.[index]
                           ? "opacity-100"
                           : "hidden opacity-0"
                       )}
                     />
-                    <Icon className="text-3xl" noobserver icon={items[index]} />
+                    <Icon
+                      className="text-3xl"
+                      noobserver
+                      icon={items?.[index]}
+                    />
                   </CommandItem>
                 )}
               />

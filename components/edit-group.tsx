@@ -56,7 +56,7 @@ const schema = z.object({
 export type Schema = z.infer<typeof schema>;
 
 let initialValues = {
-  icon: "FcFolder",
+  icon: "twemoji:file-folder",
   createdAt: new Date().toISOString().replace("Z", ""),
   updatedAt: new Date().toISOString().replace("Z", ""),
 };
