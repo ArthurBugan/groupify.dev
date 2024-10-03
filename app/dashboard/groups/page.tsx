@@ -153,6 +153,10 @@ export default function Page() {
     })();
   }, []);
 
+  if (typeof window === "undefined") {
+    return null;
+  }
+
   return (
     <>
       <Dialog modal={true} open={rating.value === true}>
