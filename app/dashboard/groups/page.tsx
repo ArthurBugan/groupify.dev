@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSignalValue } from "signals-react-safe";
+import { Star } from "lucide-react";
 
 import { sendToBackgroundViaRelay } from "@plasmohq/messaging";
 
@@ -30,7 +31,7 @@ import {
 import { get } from "@/lib/requests";
 import ThemeChanger from "@/components/old/theme-switch";
 
-import { groups, groups_channels, channels } from "@/lib/signals";
+import { groups, groups_channels, channels, ratings } from "@/lib/signals";
 import Link from "next/link";
 import { DataTable } from "@/components/data-table";
 import { EditGroup } from "@/components/edit-group";
@@ -49,6 +50,8 @@ export default function Page() {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [detect, setDetect] = useState<boolean>();
+  const [hover, setHover] = useState(0);
+  const rating = useSignalValue<{ value: boolean }>(ratings);
   const group = useSignalValue(groups);
   const channel = useSignalValue(groups_channels);
 
@@ -143,8 +146,6 @@ export default function Page() {
         name: "save-auth" as never,
         body: {
           token: token,
-          uid: "lala",
-          refreshToken: "lalala",
         },
       });
     })();
@@ -152,40 +153,132 @@ export default function Page() {
 
   return (
     <>
-      <Dialog modal={true} open={detect === false}>
+      <Dialog modal={true} open={rating.value === true}>
         <DialogContent className="sm:max-w-[800px]">
           <DialogHeader>
-            <DialogTitle>Download extension</DialogTitle>
-            <DialogDescription>
-              <p className="text-lg">
-                Please download the{" "}
-                <Link
-                  target="_blank"
-                  className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
-                  href="https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=not-found-dashboard"
-                >
-                  Groupify Extension
-                </Link>{" "}
-                from the Chrome Web Store to syncronize to be able to organize
-                your subscriptions!
-              </p>
-            </DialogDescription>
+            <DialogTitle>Rate Groupify</DialogTitle>
           </DialogHeader>
+          <DialogDescription>
+            <p className="text-lg">
+              Are you enjoying Groupify? Leave a comment and rating on your
+              browser{" "}
+            </p>
+            {navigator.userAgent.indexOf("Safari") != -1 &&
+            navigator.userAgent.indexOf("Chrome") == -1 ? (
+              <Link
+                target="_blank"
+                className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+                href="https://apps.apple.com/br/app/groupify-yt-subscriptions/id6714452813?l=en-GB?utm_source=leave-rating"
+              >
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    className={`focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary rounded-full p-1 ${
+                      hover >= star ? "text-yellow-400" : "text-gray-300"
+                    }`}
+                    onClick={() => {
+                      rating.value = false;
+                      window.open(
+                        "https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=leave-rating"
+                      );
+                    }}
+                    onMouseEnter={() => setHover(star)}
+                    onMouseLeave={() => setHover(0)}
+                    aria-label={`Rate ${star} stars out of 5`}
+                  >
+                    <Star
+                      className={`w-8 h-8 ${
+                        hover >= star ? "fill-current" : "fill-none"
+                      }`}
+                    />
+                  </button>
+                ))}
+              </Link>
+            ) : (
+              <></>
+            )}
+            {navigator.userAgent.indexOf("Firefox") != -1 ? (
+              <Link
+                target="_blank"
+                className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+                href="https://addons.mozilla.org/en-US/firefox/addon/groupify-yt-organize/?utm_source=leave-rating"
+              >
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    className={`focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary rounded-full p-1 ${
+                      hover >= star ? "text-yellow-400" : "text-gray-300"
+                    }`}
+                    onClick={() => {
+                      rating.value = false;
+                      window.open(
+                        "https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=leave-rating"
+                      );
+                    }}
+                    onMouseEnter={() => setHover(star)}
+                    onMouseLeave={() => setHover(0)}
+                    aria-label={`Rate ${star} stars out of 5`}
+                  >
+                    <Star
+                      className={`w-8 h-8 ${
+                        hover >= star ? "fill-current" : "fill-none"
+                      }`}
+                    />
+                  </button>
+                ))}
+              </Link>
+            ) : (
+              <></>
+            )}
+            {navigator.userAgent.indexOf("Chrome") != -1 ? (
+              <Link
+                target="_blank"
+                className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+                href="https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=leave-rating"
+              >
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    className={`focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary rounded-full p-1 ${
+                      hover >= star ? "text-yellow-400" : "text-gray-300"
+                    }`}
+                    onClick={() => {
+                      rating.value = false;
+                      window.open(
+                        "https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=leave-rating"
+                      );
+                    }}
+                    onMouseEnter={() => setHover(star)}
+                    onMouseLeave={() => setHover(0)}
+                    aria-label={`Rate ${star} stars out of 5`}
+                  >
+                    <Star
+                      className={`w-8 h-8 ${
+                        hover >= star ? "fill-current" : "fill-none"
+                      }`}
+                    />
+                  </button>
+                ))}
+              </Link>
+            ) : (
+              <></>
+            )}
+          </DialogDescription>
           <DialogFooter>
-            <DialogClose asChild>
+            <DialogClose
+              onClick={() => {
+                rating.value = false;
+                setDetect(true);
+              }}
+              asChild
+            >
               <Button>
-                <Link
-                  target="_blank"
-                  href="https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=not-found-dashboard"
-                >
-                  Ok
-                </Link>
+                <p>Rate!</p>
               </Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
       <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
         <Button className="lg:hidden" size="icon" variant="outline">
           <MenuIcon className="h-6 w-6" />
