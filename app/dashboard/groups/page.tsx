@@ -74,11 +74,11 @@ export default function Page() {
       extensionId: string | undefined,
       callback: Function
     ) {
-      if (navigator.userAgent.indexOf("Safari") != -1) {
+      if (navigator?.userAgent?.indexOf?.("Safari") != -1) {
         return false;
       }
 
-      if (navigator.userAgent.indexOf("Firefox") != -1) {
+      if (navigator?.userAgent?.indexOf?.("Firefox") != -1) {
         return;
       }
 
