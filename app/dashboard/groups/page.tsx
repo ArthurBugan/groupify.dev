@@ -38,7 +38,6 @@ import Link from "next/link";
 import { DataTable } from "@/components/data-table";
 import { EditGroup } from "@/components/edit-group";
 import { DeleteAccount } from "@/components/delete-account";
-import { userAgent } from "next/server";
 
 type Item = {
   id: string;
@@ -57,7 +56,6 @@ export default function Page() {
   const rating = useSignalValue<{ value: boolean }>(ratings);
   const group = useSignalValue(groups);
   const channel = useSignalValue(groups_channels);
-  let navigator = { userAgent: "" };
 
   const logout = () => {
     document.cookie.split(";").forEach(function (c) {
@@ -78,11 +76,11 @@ export default function Page() {
       extensionId: string | undefined,
       callback: Function
     ) {
-      if (navigator?.userAgent?.indexOf?.("Safari") != -1) {
+      if (window?.navigator?.userAgent?.indexOf?.("Safari") != -1) {
         return false;
       }
 
-      if (navigator?.userAgent?.indexOf?.("Firefox") != -1) {
+      if (window?.navigator?.userAgent?.indexOf?.("Firefox") != -1) {
         return;
       }
 
@@ -153,7 +151,6 @@ export default function Page() {
         },
       });
     })();
-    navigator = window.navigator;
   }, []);
 
   return (
@@ -168,7 +165,7 @@ export default function Page() {
               Are you enjoying Groupify? Leave a comment and rating on your
               browser{" "}
             </p>
-            {navigator.userAgent.indexOf("Safari") != -1 ? (
+            {window?.navigator?.userAgent.indexOf("Safari") != -1 ? (
               <Link
                 target="_blank"
                 className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
@@ -201,7 +198,7 @@ export default function Page() {
             ) : (
               <></>
             )}
-            {navigator.userAgent.indexOf("Firefox") != -1 ? (
+            {window?.navigator?.userAgent.indexOf("Firefox") != -1 ? (
               <Link
                 target="_blank"
                 className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
@@ -234,7 +231,7 @@ export default function Page() {
             ) : (
               <></>
             )}
-            {navigator.userAgent.indexOf("Chrome") != -1 ? (
+            {window?.navigator?.userAgent.indexOf("Chrome") != -1 ? (
               <Link
                 target="_blank"
                 className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
