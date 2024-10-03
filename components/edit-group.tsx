@@ -26,7 +26,7 @@ import * as z from "zod";
 import { FormProvider, set, useFieldArray, useForm } from "react-hook-form";
 import { Combobox } from "./ui/combobox";
 import { get, post, put } from "@/lib/requests";
-import { groups, groups_channels } from "@/lib/signals";
+import { groups, groups_channels, ratings } from "@/lib/signals";
 import { useSignalValue } from "signals-react-safe";
 import { Loader } from "./ui/loader";
 
@@ -71,6 +71,7 @@ export function EditGroup({
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
   const group_channel = useSignalValue(groups_channels);
+  const rating = useSignalValue<{ value: boolean }>(ratings);
 
   const { ...methods } = useForm<Schema>({
     defaultValues: initialValues,
@@ -137,6 +138,12 @@ export function EditGroup({
     groups.value = data;
 
     setOpen(false);
+
+    if (localStorage.getItem("rating") == null) {
+      rating.value = true;
+    }
+
+    localStorage.setItem("rating", "true");
 
     toast({
       duration: 3000,
@@ -258,7 +265,7 @@ export function EditGroup({
               {methods.formState.isSubmitting ? (
                 <>
                   {" "}
-                  <p className="text-sm">Please wait...</p> <Loader />
+                  <p className="text-sm mr-2">Please wait...</p> <Loader />
                 </>
               ) : (
                 "Save Changes"

@@ -8,4 +8,6 @@ const language: any = signal({});
 
 const groups_channels: any = signal({})
 
-export { channels, groups, groups_channels, language };
+const ratings: any = signal({});
+
+export { channels, groups, groups_channels, language, ratings };
