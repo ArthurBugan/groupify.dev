@@ -1,4 +1,6 @@
 "use client";
+import dynamic from "next/dynamic";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSignalValue } from "signals-react-safe";
@@ -36,6 +38,7 @@ import Link from "next/link";
 import { DataTable } from "@/components/data-table";
 import { EditGroup } from "@/components/edit-group";
 import { DeleteAccount } from "@/components/delete-account";
+import { userAgent } from "next/server";
 
 type Item = {
   id: string;
@@ -54,6 +57,7 @@ export default function Page() {
   const rating = useSignalValue<{ value: boolean }>(ratings);
   const group = useSignalValue(groups);
   const channel = useSignalValue(groups_channels);
+  let navigator = { userAgent: "" };
 
   const logout = () => {
     document.cookie.split(";").forEach(function (c) {
