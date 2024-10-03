@@ -153,6 +153,7 @@ export default function Page() {
         },
       });
     })();
+    navigator = window.navigator;
   }, []);
 
   return (
@@ -167,8 +168,7 @@ export default function Page() {
               Are you enjoying Groupify? Leave a comment and rating on your
               browser{" "}
             </p>
-            {navigator.userAgent.indexOf("Safari") != -1 &&
-            navigator.userAgent.indexOf("Chrome") == -1 ? (
+            {navigator.userAgent.indexOf("Safari") != -1 ? (
               <Link
                 target="_blank"
                 className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
