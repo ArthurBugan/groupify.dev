@@ -42,6 +42,12 @@ const Footer = ({ dictionary }: any) => {
                 {item}
               </Link>
             ))}
+            <Link
+              href="/privacy"
+              className="w-full px-4 py-2 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-slate-700"
+            >
+              Privacy Policy
+            </Link>
           </div>
         </div>
         <div className="">
