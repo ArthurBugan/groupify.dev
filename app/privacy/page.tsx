@@ -3,7 +3,7 @@ import React from "react";
 export default function PrivacyPage() {
   return (
     <div className="flex m-10 items-center justify-center">
-      <article className="prose">
+      <article className="prose dark:prose-invert">
         <h1>Privacy Policy</h1>
         <p>Last updated: May 11, 2024</p>
         <p>
