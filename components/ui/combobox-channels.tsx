@@ -99,7 +99,14 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
 
   const renderText = () => {
     if (filter.length === 0) {
-      return "Visit youtube to sync your channels and then reload the page and this input will be populated";
+      return (
+        <a
+          className="underline"
+          href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
+        >
+          Link your Youtube account with Groupify to sync all your subscriptions
+        </a>
+      );
     }
 
     return "No channel found...";

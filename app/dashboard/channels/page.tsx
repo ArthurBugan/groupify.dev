@@ -19,21 +19,66 @@ import ThemeChanger from "@/components/old/theme-switch";
 import { columns } from "./columns";
 import { DataTable } from "@/components/data-table";
 import { useSignalValue } from "signals-react-safe";
-import { get } from "@/lib/requests";
+import { get, post } from "@/lib/requests";
 
 import { DeleteAccount } from "@/components/delete-account";
-import Link from "next/link";
+import { Youtube } from "lucide-react";
+import { Loader } from "@/components/ui/loader";
+import { useToast } from "@/components/ui/use-toast";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ToastAction } from "@/components/ui/toast";
 
 export default function Page() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     (async () => {
       try {
-        const api_channels = await get("/youtube-channels");
-        channels.value = api_channels;
+        setLoading(true);
+        const youtube_session = await get("/check-google-session");
+
+        if (youtube_session.success === "true") {
+          let api_channels = await get("/youtube-channels");
+
+          if (api_channels.length === 0) {
+            const sync = await post("/sync-channels-from-youtube", {});
+
+            api_channels = await get("/youtube-channels");
+          }
+
+          channels.value = api_channels;
+        }
+
+        setLoading(false);
       } catch (error: any) {
+        setLoading(false);
+
+        if (error?.responseBody?.error === "Session not found") {
+          toast({
+            duration: 3000,
+            variant: "destructive",
+            title: "Link your Youtube Account",
+            action: (
+              <ToastAction altText="Link">
+                <a
+                  href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
+                >
+                  Link it
+                </a>
+              </ToastAction>
+            ),
+            description: "Link it and be able to organize your groups",
+          });
+        }
+
         if (error?.status === 401) {
           return router.replace("/login");
         }
@@ -108,24 +153,98 @@ export default function Page() {
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
+
       <main className="flex flex-1 flex-col gap-4 p-4">
-        <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
-          Here you can see all your chnnels, to add them to{" "}
-          <Link
-            className="text-sm font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
-            href="/dashboard/groups"
+        {loading && (
+          <div className="flex flex-row">
+            <Loader />
+            <span className="font-bold text-lg ml-4">Loading</span>
+          </div>
+        )}
+
+        {items.length > 0 ? (
+          <DataTable
+            emptyStateMessage="Click on the button below to link your Youtube channel and Sync the your Youtube Subscriptions"
+            loading={loading}
+            columns={columns}
+            data={items}
+            onRowClick={(row) =>
+              window.open(
+                `https://youtube.com/channel/${row?.original?.url.replace(
+                  "@",
+                  ""
+                )}`
+              )
+            }
+          />
+        ) : (
+          <></>
+        )}
+
+        <div className="grid grid-cols-3">
+          <Card
+            className={`${
+              items.length === 0 && loading === false ? "block" : "hidden"
+            }`}
           >
-            Groups
-          </Link>{" "}
-          Click on Edit Icon and inside the Edit Group Modal and click on "Add
-          new channel" input.
-        </p>
-        <DataTable
-          emptyStateMessage="Visit youtube and wait for your channels sync, one they show here you can add them to groups, if this is list empty try to reload the page or visit youtube and wait a little longer"
-          loading={loading}
-          columns={columns}
-          data={items}
-        />
+            <a
+              href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
+            >
+              <CardHeader className="pb-4">
+                <CardTitle>Link your youtube subscriptions</CardTitle>
+                <CardDescription>
+                  Click here to link your Youtube account and sync all your
+                  subscriptions
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full" size="sm">
+                  Link it!
+                </Button>
+              </CardContent>
+            </a>
+          </Card>
+          <Card className={`${items.length > 0 ? "block" : "hidden"}`}>
+            <CardHeader className="pb-4">
+              <CardTitle>Update the channel list</CardTitle>
+              <CardDescription>
+                Click here if you want to re-sync your Youtube Subscription list
+                here on Groupify
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button
+                onClick={async () => {
+                  setLoading(true);
+
+                  toast({
+                    duration: 3000,
+                    variant: "success",
+                    title: "Resync is progress",
+                    description: "Please await! Dont leave the page",
+                  });
+
+                  const sync = await post("/sync-channels-from-youtube", {});
+                  const api_channels = await get("/youtube-channels");
+
+                  channels.value = api_channels;
+                  setLoading(false);
+
+                  toast({
+                    duration: 3000,
+                    variant: "success",
+                    title: "Resync is done",
+                    description: "You can now organize all your channels",
+                  });
+                }}
+                className="w-full"
+                size="sm"
+              >
+                Re-Sync
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </main>
     </>
   );
