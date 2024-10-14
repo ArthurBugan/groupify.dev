@@ -30,7 +30,7 @@ import {
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
 
-import { get } from "@/lib/requests";
+import { get, post } from "@/lib/requests";
 import ThemeChanger from "@/components/old/theme-switch";
 
 import { groups, groups_channels, channels, ratings } from "@/lib/signals";
@@ -38,6 +38,8 @@ import Link from "next/link";
 import { DataTable } from "@/components/data-table";
 import { EditGroup } from "@/components/edit-group";
 import { DeleteAccount } from "@/components/delete-account";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 type Item = {
   id: string;
@@ -56,6 +58,7 @@ export default function Page() {
   const rating = useSignalValue<{ value: boolean }>(ratings);
   const group = useSignalValue(groups);
   const channel = useSignalValue(groups_channels);
+  const { toast } = useToast();
 
   const logout = () => {
     document.cookie.split(";").forEach(function (c) {
@@ -131,6 +134,34 @@ export default function Page() {
       } catch (error: any) {
         if (error?.status === 401) {
           return router.replace("/login");
+        }
+      }
+
+      try {
+        const youtube_session = await get("/check-google-session");
+
+        if (channels.value.length === 0) {
+          const sync = await post("/sync-channels-from-youtube", {});
+        }
+      } catch (error: any) {
+        setLoading(false);
+
+        if (error?.responseBody?.error === "Session not found") {
+          toast({
+            duration: 3000,
+            variant: "destructive",
+            title: "Link your Youtube Account",
+            action: (
+              <ToastAction altText="Link">
+                <a
+                  href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
+                >
+                  Link it
+                </a>
+              </ToastAction>
+            ),
+            description: "Link it and be able to organize your groups",
+          });
         }
       }
     })();
@@ -336,7 +367,12 @@ export default function Page() {
       </header>
 
       <main className="flex flex-1 flex-col gap-4 p-4">
-        <DataTable loading={loading} columns={columns} data={group} />
+        <DataTable
+          onRowClick={() => null}
+          loading={loading}
+          columns={columns}
+          data={group}
+        />
         <EditGroup formValues={{ channels: [] }} type="add" />
       </main>
     </>

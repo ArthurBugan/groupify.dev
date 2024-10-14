@@ -29,6 +29,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   loading: boolean;
   emptyStateMessage?: string;
+  onRowClick: (row: any) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -36,6 +37,7 @@ export function DataTable<TData, TValue>({
   data,
   loading,
   emptyStateMessage,
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -97,6 +99,7 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  onClick={() => onRowClick?.(row)}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
