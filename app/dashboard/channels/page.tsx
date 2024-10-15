@@ -61,6 +61,8 @@ export default function Page() {
       } catch (error: any) {
         setLoading(false);
 
+        channels.value = [];
+
         if (error?.responseBody?.error === "Session not found") {
           toast({
             duration: 3000,
@@ -162,24 +164,20 @@ export default function Page() {
           </div>
         )}
 
-        {items.length > 0 ? (
-          <DataTable
-            emptyStateMessage="Click on the button below to link your Youtube channel and Sync the your Youtube Subscriptions"
-            loading={loading}
-            columns={columns}
-            data={items}
-            onRowClick={(row) =>
-              window.open(
-                `https://youtube.com/channel/${row?.original?.url.replace(
-                  "@",
-                  ""
-                )}`
-              )
-            }
-          />
-        ) : (
-          <></>
-        )}
+        <DataTable
+          emptyStateMessage="Click on the button below to link your Youtube channel and Sync the your Youtube Subscriptions"
+          loading={loading}
+          columns={columns}
+          data={items}
+          onRowClick={(row) =>
+            window.open(
+              `https://youtube.com/channel/${row?.original?.url.replace(
+                "@",
+                ""
+              )}`
+            )
+          }
+        />
 
         <div className="grid grid-cols-3">
           <Card
