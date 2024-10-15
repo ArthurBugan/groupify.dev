@@ -180,14 +180,13 @@ export default function Page() {
         />
 
         <div className="grid grid-cols-3">
-          <Card
+          <a
             className={`${
               items.length === 0 && loading === false ? "block" : "hidden"
             }`}
+            href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
           >
-            <a
-              href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
-            >
+            <Card>
               <CardHeader className="pb-4">
                 <CardTitle>Link your youtube subscriptions</CardTitle>
                 <CardDescription>
@@ -200,8 +199,9 @@ export default function Page() {
                   Link it!
                 </Button>
               </CardContent>
-            </a>
-          </Card>
+            </Card>
+          </a>
+
           <Card className={`${items.length > 0 ? "block" : "hidden"}`}>
             <CardHeader className="pb-4">
               <CardTitle>Update the channel list</CardTitle>
