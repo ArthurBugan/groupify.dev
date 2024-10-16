@@ -216,7 +216,7 @@ export default function Page() {
                     onClick={() => {
                       rating.value = false;
                       window.open(
-                        "https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija/review?utm_source=leave-rating"
+                        "https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=leave-rating"
                       );
                     }}
                     onMouseEnter={() => setHover(star)}
@@ -249,7 +249,7 @@ export default function Page() {
                     onClick={() => {
                       rating.value = false;
                       window.open(
-                        "https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija/review?utm_source=leave-rating"
+                        "https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=leave-rating"
                       );
                     }}
                     onMouseEnter={() => setHover(star)}
@@ -271,7 +271,7 @@ export default function Page() {
               <Link
                 target="_blank"
                 className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
-                href="https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija/review?utm_source=leave-rating"
+                href="https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=leave-rating"
               >
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -282,7 +282,7 @@ export default function Page() {
                     onClick={() => {
                       rating.value = false;
                       window.open(
-                        "https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija/review?utm_source=leave-rating"
+                        "https://chromewebstore.google.com/detail/groupify-organize-youtube/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=leave-rating"
                       );
                     }}
                     onMouseEnter={() => setHover(star)}
