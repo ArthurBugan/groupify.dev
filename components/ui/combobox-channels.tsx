@@ -102,7 +102,7 @@ const ComboboxChannels: React.FC<ComboboxProps> = ({ append, name = "" }) => {
       return (
         <a
           className="underline"
-          href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
+          href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&access_type=offline&prompt=consent&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
         >
           Link your Youtube account with Groupify to sync all your subscriptions
         </a>

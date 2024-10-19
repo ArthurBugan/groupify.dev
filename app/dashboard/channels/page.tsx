@@ -71,7 +71,7 @@ export default function Page() {
             action: (
               <ToastAction altText="Link">
                 <a
-                  href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
+                  href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&access_type=offline&prompt=consent&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
                 >
                   Link it
                 </a>
@@ -184,7 +184,7 @@ export default function Page() {
             className={`${
               items.length === 0 && loading === false ? "block" : "hidden"
             }`}
-            href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
+            href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&access_type=offline&prompt=consent&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
           >
             <Card>
               <CardHeader className="pb-4">
