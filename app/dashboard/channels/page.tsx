@@ -90,13 +90,8 @@ export default function Page() {
 
   const items = useSignalValue(channels);
 
-  const logout = () => {
-    document.cookie.split(";").forEach(function (c) {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    });
-
+  const logout = async () => {
+    await post("/logout", {});
     location.reload();
   };
 
@@ -150,10 +145,9 @@ export default function Page() {
             <DropdownMenuItem onClick={support}>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DeleteAccount />
           </DropdownMenuContent>
         </DropdownMenu>
+        <DeleteAccount />
       </header>
 
       <main className="flex flex-1 flex-col gap-4 p-4">
@@ -179,14 +173,14 @@ export default function Page() {
           }
         />
 
-        <div className="grid grid-cols-3">
+        <div className="grid  grid-cols-1 lg:grid-cols-3">
           <a
             className={`${
               items.length === 0 && loading === false ? "block" : "hidden"
             }`}
             href={`https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly&client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&response_type=code&access_type=offline&prompt=consent&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google_callback`}
           >
-            <Card>
+            <Card className="w-full max-w-3xl mx-auto">
               <CardHeader className="pb-4">
                 <CardTitle>Link your youtube subscriptions</CardTitle>
                 <CardDescription>

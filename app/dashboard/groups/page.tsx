@@ -51,22 +51,17 @@ type Item = {
 
 export default function Page() {
   const router = useRouter();
-
   const [loading, setLoading] = useState<boolean>(false);
   const [detect, setDetect] = useState<boolean>();
   const [hover, setHover] = useState(0);
+
   const rating = useSignalValue<{ value: boolean }>(ratings);
   const group = useSignalValue(groups);
   const channel = useSignalValue(groups_channels);
   const { toast } = useToast();
 
-  const logout = () => {
-    document.cookie.split(";").forEach(function (c) {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    });
-
+  const logout = async () => {
+    await post("/logout", {});
     location.reload();
   };
 
@@ -316,6 +311,7 @@ export default function Page() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
       <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
         <Button className="lg:hidden" size="icon" variant="outline">
           <MenuIcon className="h-6 w-6" />
@@ -360,10 +356,9 @@ export default function Page() {
             <DropdownMenuItem onClick={support}>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DeleteAccount />
           </DropdownMenuContent>
         </DropdownMenu>
+        <DeleteAccount />
       </header>
 
       <main className="flex flex-1 flex-col gap-4 p-4">
