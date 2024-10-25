@@ -4,6 +4,7 @@ import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
 import ThemeChanger from "./theme-switch";
+import DashboardMenu from "../ui/dashboard-menu";
 
 const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
   return (
@@ -59,11 +60,12 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
 
             <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
               <>
+                <DashboardMenu />
                 {dictionary.navigation?.map((item: any, index: any) => (
                   <Link
                     key={item}
                     href={"/#" + item}
-                    className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
+                    className="w-full inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
                   >
                     {item}
                   </Link>
@@ -72,7 +74,7 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
                   <Link
                     key={menu.slug}
                     href={"/" + menu.slug}
-                    className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
+                    className="w-full inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
                   >
                     {menu.name}
                   </Link>
@@ -80,7 +82,7 @@ const DisclosureComponents = ({ showLanguage, dictionary }: any) => {
                 <Link
                   about="_blank"
                   href="https://chrome.google.com/webstore/detail/groupify/dmdgaegnpjnnkcbdngfgkhlehlccbija?utm_source=groupify-lp"
-                  className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5"
+                  className="w-full inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
                 >
                   Install for free
                 </Link>

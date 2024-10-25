@@ -2,6 +2,7 @@ import Link from "next/link";
 import ThemeChanger from "./theme-switch";
 import MobileNavBar from "./mobile-navbar";
 import Image from "next/image";
+import DashboardMenu from "../ui/dashboard-menu";
 
 const Navbar = ({ dictionary }: any) => {
   return (
@@ -28,6 +29,7 @@ const Navbar = ({ dictionary }: any) => {
 
         <div className="hidden text-center lg:flex flex-initial lg:items-center">
           <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
+            <DashboardMenu />
             {dictionary.navigation?.map((menu: any, index: any) => (
               <li className="mr-3 hover: nav__item" key={menu}>
                 <Link
