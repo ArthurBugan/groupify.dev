@@ -3,8 +3,7 @@
 import { twMerge } from "tailwind-merge";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { HelpCircle, PictureInPicture, Video } from "lucide-react";
-import { FaDrawPolygon } from "react-icons/fa6";
+import { HelpCircle } from "lucide-react";
 import { Icon } from "@iconify-icon/react";
 
 export function Links() {
