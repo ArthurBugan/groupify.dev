@@ -101,55 +101,6 @@ export default function Page() {
 
   return (
     <>
-      <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
-        <Button className="lg:hidden" size="icon" variant="outline">
-          <MenuIcon className="h-6 w-6" />
-          <span className="sr-only">Toggle navigation menu</span>
-        </Button>
-        <div className="w-full flex-1"></div>
-        <ThemeChanger />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              className="rounded-full border border-gray-200 w-8 h-8 dark:border-gray-800"
-              size="icon"
-              variant="ghost"
-            >
-              <svg
-                width="200"
-                height="200"
-                viewBox="0 0 200 200"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="100" cy="100" r="90" fill="#F9E3C0" />
-                <circle cx="100" cy="80" r="60" fill="#F2C78D" />
-                <circle cx="80" cy="70" r="8" fill="#231F20" />
-                <circle cx="120" cy="70" r="8" fill="#231F20" />
-                <path
-                  d="M 80 100 Q 100 120 120 100"
-                  fill="none"
-                  stroke="#231F20"
-                  strokeWidth="4"
-                />
-                <rect x="80" y="110" width="40" height="60" fill="#F2C78D" />
-                <rect x="60" y="110" width="20" height="40" fill="#F2C78D" />
-                <rect x="120" y="110" width="20" height="40" fill="#F2C78D" />
-                <rect x="85" y="170" width="15" height="30" fill="#F2C78D" />
-                <rect x="100" y="170" width="15" height="30" fill="#F2C78D" />
-              </svg>
-
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={support}>Support</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <DeleteAccount />
-      </header>
-
       <main className="flex flex-1 flex-col gap-4 p-4">
         {loading && (
           <div className="flex flex-row">
