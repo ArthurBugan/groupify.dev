@@ -8,7 +8,7 @@ import DonationCard from "@/components/ui/donation-card";
 
 export default function SidecarContent() {
   return (
-    <div className="flex h-full max-h-screen flex-col gap-2">
+    <div className="flex h-full overflow-auto  max-h-screen flex-col gap-2">
       <div className="flex h-[60px] items-center border-b px-6">
         <Link className="flex items-center gap-2 font-semibold" href="/">
           <Image
@@ -21,7 +21,7 @@ export default function SidecarContent() {
           <span className="">Groupify</span>
         </Link>
       </div>
-      <div className="flex-1 overflow-auto py-2">
+      <div className="flex-1 py-2">
         <nav className="grid items-start px-4 text-sm font-medium">
           <Links />
         </nav>
