@@ -13,7 +13,7 @@ export default function MenuContent() {
   };
 
   const support = () => {
-    window.open("https://www.youtube.com/watch?v=2S1y5RxFUMc");
+    window.open("https://www.youtube.com/watch?v=A2UDaMMP0Uk");
   };
 
   return (
