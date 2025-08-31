@@ -70,7 +70,7 @@ export default async function BlogPage() {
               const { metadata } = article;
               const title = String(metadata.title);
               const description = String(metadata.description || "");
-              const publishedAt = String(metadata.publishedAt || "");
+              const publishedAt = String(metadata.date || "");
               const image = String(metadata.image || "/placeholder.svg");
 
               return (

@@ -133,4 +133,10 @@ export default function ForgetPassword() {
         {/* Footer */}
         <div className="text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Remember your password? <Link href="/login" className="
+            Remember your password? <Link href="/login" className="font-medium text-orange-600 hover:text-orange-500 dark:text-orange-400 dark:hover:text-orange-300 transition-colors duration-200">Sign in</Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
