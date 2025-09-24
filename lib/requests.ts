@@ -30,7 +30,10 @@ const post = async (url: string, body: any, headers: any = {}) => {
       credentials: 'include',
       method: 'POST',
       body,
-      headers
+      headers: {
+        ...headers,
+        "Content-Type": "application/json",
+      }
     });
 
     if (!response.ok) {

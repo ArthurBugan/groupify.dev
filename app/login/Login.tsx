@@ -42,7 +42,8 @@ const Login = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
     try {
-      const resp = await post("/authorize", data);
+      console.log(data);
+      const resp = await post("/authorize", JSON.stringify(data));
       router.push("/dashboard/groups");
     } catch (error: any) {
       setError(error);
