@@ -41,14 +41,8 @@ const Login = () => {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
-    const formData = new FormData();
-    setError({ error: "" });
-
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-
     try {
-      const resp = await post("/authorize", formData);
+      const resp = await post("/authorize", data);
       router.push("/dashboard/groups");
     } catch (error: any) {
       setError(error);
